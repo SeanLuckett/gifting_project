@@ -8,6 +8,7 @@ gem 'rails', '3.2.7'
 gem 'pg'
 gem 'haml'
 gem 'haml-rails', group: :development
+gem 'omniauth-facebook'
 
 group :test do
   gem 'database_cleaner', "~> 0.7.2"
