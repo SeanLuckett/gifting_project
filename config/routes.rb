@@ -1,7 +1,13 @@
 Giftola::Application.routes.draw do
+  get "recipients/import_friends", as: '/import_friends'
+
   root to: 'static_pages#home'
+
   match 'auth/facebook/callback', to: 'sessions#create'
-  match '/sessions/test_page', to: 'sessions#test_page', as: 'test_page'
+  match 'auth/failure', to: redirect('/')
+
+  #match '/recipients/import_friends', to: 'recipients#import_friends', as: '/import_friends'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

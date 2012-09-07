@@ -8,6 +8,7 @@ gem 'rails', '3.2.7'
 gem 'pg'
 gem 'haml'
 gem 'haml-rails', group: :development
+gem 'annotate', group: :development
 gem 'omniauth-facebook'
 
 group :test do
@@ -16,6 +17,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara', ">= 1.1.2"
   gem 'launchy', ">= 2.1.0"
+  gem 'debugger'
 end
 
 # Gems used only for assets and not required

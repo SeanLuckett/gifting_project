@@ -3,7 +3,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    #raise env['omniauth.auth'].to_yaml
-    redirect_to test_page_path
+    user = User.from_omniauth(env["omniauth.auth"])
+    session[:user_id] = user.id
+    redirect_to import_friends_path
   end
 end
