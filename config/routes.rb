@@ -6,6 +6,8 @@ Giftola::Application.routes.draw do
   match 'auth/facebook/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
 
+  resources :users, :only => [:show, :edit]
+
   #match '/recipients/import_friends', to: 'recipients#import_friends', as: '/import_friends'
 
   # The priority is based upon order of creation:
