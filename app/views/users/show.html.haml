@@ -1,2 +1,15 @@
-%h1 Users#show
-%p Find me in app/views/users/show.html.haml
+- provide(:title, @user.name)
+%section
+  %h1
+    = @user.name
+
+  %p= link_to("change", edit_user_path(@user))
+%section
+  #user_details
+    -#%p
+      -#%span.user-attr Address:
+      -#= @user.street_address
+
+    -#%p
+      -#%span.user-attr Address:
+      -#= @user.optional_address

@@ -1,4 +1,6 @@
 Giftola::Application.routes.draw do
+  get "dashboard/index"
+
   get "recipients/import_friends", as: '/import_friends'
 
   root to: 'static_pages#home'

@@ -1,12 +1,12 @@
 def set_omniauth(opts = {})
   default = {:provider => :facebook,
-             :uuid     => "1234",
+             :uuid     => "123545",
              :facebook => {
-                            :email => "user@example.com",
-                            :gender => "Male",
-                            :first_name => "user",
-                            :last_name => "mcfoo"
-                          }
+               :email => "user@example.com",
+               :gender => "Male",
+               :first_name => "user",
+               :last_name => "mcfoo"
+             }
             }
 
   credentials = default.merge(opts)
@@ -15,29 +15,28 @@ def set_omniauth(opts = {})
 
   OmniAuth.config.test_mode = true
 
-  # This hash is no longer correct.  See https://github.com/mkdynamic/omniauth-facebook#auth-hash
-  # for latest hash structure.
-  # TODO use this code iff need it in tests due to multiple calls to omniauth.auth hash
-  OmniAuth.config.mock_auth[provider] = {
-    'uid' => credentials[:uuid],
-    "extra" => {
-      "user_hash" => {
-        "email" => user_hash[:email],
-        "first_name" => user_hash[:first_name],
-        "last_name" => user_hash[:last_name],
-        "gender" => user_hash[:gender]
-      }
+  OmniAuth.config.mock_auth[provider] = OmniAuth::AuthHash.new({
+    :uid => credentials[:uuid],
+    :info => {
+      :email => user_hash[:email],
+      :first_name => user_hash[:first_name],
+      :last_name => user_hash[:last_name],
+    },
+    :credentials => {
+      :token => "ABCDEF...",
+      :expires_at => Time.now
     }
-  }
+  })
 end
 
-def set_invalid_omniauth(opts = {})
+# TODO implement this for a test or delete it
+#def set_invalid_omniauth(opts = {})
 
-  credentials = { :provider => :facebook,
-                  :invalid  => :invalid_credentials
-                }.merge(opts)
+  #credentials = { :provider => :facebook,
+                  #:invalid  => :invalid_credentials
+                #}.merge(opts)
 
-  OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[credentials[:provider]] = credentials[:invalid]
+  #OmniAuth.config.test_mode = true
+  #OmniAuth.config.mock_auth[credentials[:provider]] = credentials[:invalid]
 
-end
+#end

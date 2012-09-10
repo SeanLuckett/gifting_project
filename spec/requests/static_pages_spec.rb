@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'debugger'
 
 describe "StaticPages" do
   subject { page }
@@ -7,16 +6,7 @@ describe "StaticPages" do
   describe "Landing page" do
 
     before do
-      OmniAuth.config.test_mode = true
-      OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
-        :provider => 'facebook',
-        :uid => '123545',
-        :info => { :name => "Collin Schaafsma" },
-        :credentials => {
-          :token => "ABCDEF...",
-          :expires_at => Time.now
-        }
-      })
+      set_omniauth
       visit root_path
     end
 
