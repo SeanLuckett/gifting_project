@@ -4,8 +4,8 @@ def set_omniauth(opts = {})
              :facebook => {
                :email => "user@example.com",
                :gender => "Male",
-               :first_name => "user",
-               :last_name => "mcfoo"
+               :name => "User Mcfoo",
+               :image => "http://www.placekitten.com/100/100"
              }
             }
 
@@ -19,8 +19,8 @@ def set_omniauth(opts = {})
     :uid => credentials[:uuid],
     :info => {
       :email => user_hash[:email],
-      :first_name => user_hash[:first_name],
-      :last_name => user_hash[:last_name],
+      :name => user_hash[:name],
+      :image => user_hash[:image]
     },
     :credentials => {
       :token => "ABCDEF...",

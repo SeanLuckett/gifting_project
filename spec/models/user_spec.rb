@@ -15,6 +15,7 @@
 #  city             :string(255)
 #  state            :string(255)
 #  zipcode          :string(255)
+#  image            :string(255)
 #
 
 require 'spec_helper'

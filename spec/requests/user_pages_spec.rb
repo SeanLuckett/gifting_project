@@ -14,6 +14,8 @@ describe "User pages" do
 
     it { should have_selector('title', text: user.name) }
     it { should have_selector('h1',    text: user.name) }
+    it { should have_selector('h3',    text: user.email) }
+    it { should have_selector(:xpath, '//img[@src="http://www.placekitten.com/100/100"]') }
     it { should have_link('change',    href: "/users/#{user.id}/edit") }
 
     it { should have_content(user.address1) }
@@ -22,7 +24,7 @@ describe "User pages" do
     it { should have_content(user.state) }
     it { should have_content(user.zipcode) }
 
-    context "without payment info" do
+    context "When credit card not on file" do
       it { should have_content("No credit card entered") }
     end
   end

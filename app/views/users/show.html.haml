@@ -1,15 +1,19 @@
 - provide(:title, @user.name)
-%section
+%section#user_name
+  #user_image= image_tag(@user.image)
   %h1
     = @user.name
+    = link_to("change", edit_user_path(@user))
+  %h3= @user.email if @user.email
 
-  %p= link_to("change", edit_user_path(@user))
-%section
-  #user_details
-    -#%p
-      -#%span.user-attr Address:
-      -#= @user.street_address
+%section#user_address
+  %p
+    %span.user-attr= @user.address1 << ", " << @user.address2
+    %br/
+    %span.user-attr= @user.city << ", " << @user.state
+    %br/
+    %span.user-attr= @user.zipcode
 
-    -#%p
-      -#%span.user-attr Address:
-      -#= @user.optional_address
+  %p
+    %span.attr_heading Payment info:
+    %span.cc_info No credit card entered.
