@@ -10,11 +10,7 @@
 #  oauth_expires_at :datetime
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  address1         :string(255)
-#  address2         :string(255)
-#  city             :string(255)
-#  state            :string(255)
-#  zipcode          :string(255)
+#  email            :string(255)
 #  image            :string(255)
 #
 

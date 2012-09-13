@@ -1,3 +1,8 @@
 - provide(:title, "Edit your profile")
-%h1 Users#edit
-%p Find me in app/views/users/edit.html.haml
+%section#user_name
+  #user_image= image_tag(@user.image)
+  %h1
+    = @user.name
+  =form_for @user do |f|
+    = f.text_field :email, value: @user.email || "enter email address"
+    = f.submit "Done"

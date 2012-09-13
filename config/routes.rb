@@ -8,7 +8,7 @@ Giftola::Application.routes.draw do
   match 'auth/facebook/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
 
-  resources :users, :only => [:show, :edit]
+  resources :users, :only => [:show, :edit, :update]
 
   #match '/recipients/import_friends', to: 'recipients#import_friends', as: '/import_friends'
 

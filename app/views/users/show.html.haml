@@ -3,17 +3,7 @@
   #user_image= image_tag(@user.image)
   %h1
     = @user.name
+  %h3
+    = @user.email if @user.email 
     = link_to("change", edit_user_path(@user))
-  %h3= @user.email if @user.email
 
-%section#user_address
-  %p
-    %span.user-attr= @user.address1 << ", " << @user.address2
-    %br/
-    %span.user-attr= @user.city << ", " << @user.state
-    %br/
-    %span.user-attr= @user.zipcode
-
-  %p
-    %span.attr_heading Payment info:
-    %span.cc_info No credit card entered.

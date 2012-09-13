@@ -10,6 +10,7 @@ gem 'haml'
 gem 'haml-rails', group: :development
 gem 'annotate', group: :development
 gem 'omniauth-facebook'
+gem 'koala'
 
 group :test do
   gem 'database_cleaner', "~> 0.7.2"

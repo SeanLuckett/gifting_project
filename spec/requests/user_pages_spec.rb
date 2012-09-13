@@ -8,24 +8,33 @@ describe "User pages" do
     let(:user) { User.first }
     before do
       sign_in_user
-      give_address_to(user)
       visit user_path(user)
     end
 
-    it { should have_selector('title', text: user.name) }
-    it { should have_selector('h1',    text: user.name) }
-    it { should have_selector('h3',    text: user.email) }
-    it { should have_selector(:xpath, '//img[@src="http://www.placekitten.com/100/100"]') }
-    it { should have_link('change',    href: "/users/#{user.id}/edit") }
+    context "when viewing" do
 
-    it { should have_content(user.address1) }
-    it { should have_content(user.address2) }
-    it { should have_content(user.city) }
-    it { should have_content(user.state) }
-    it { should have_content(user.zipcode) }
+      it { should have_selector('title', text: user.name) }
+      it { should have_selector('h1',    text: user.name) }
+      it { should have_selector('h3',    text: user.email) }
+      it { should have_selector(:xpath, "//img[@src='#{user.image}']") }
+      it { should have_link('change',    href: "/users/#{user.id}/edit") }
 
-    context "When credit card not on file" do
-      it { should have_content("No credit card entered") }
+    end
+
+    context "when editing" do
+      before { click_link "change" }
+
+      it { should have_selector("input", value: user.email) }
+
+      context "when changing email" do
+        before do
+          fill_in("user_email", with: "test@example.net")
+          click_button("Done")
+        end
+
+        specify { user.reload.email.should eq("test@example.net") }
+
+      end
     end
   end
 end
