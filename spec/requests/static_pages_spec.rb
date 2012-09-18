@@ -12,7 +12,7 @@ describe "StaticPages" do
 
     it "routes to recipients#import_friends after authentication" do
       click_link("Sign in with Facebook")
-      page.should have_content("Import your friends from Facebook")
+      page.should have_content("Import your Facebook friends")
     end
 
     context "Saving new, and recognizing old, users" do
