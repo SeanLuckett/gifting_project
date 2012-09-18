@@ -1,18 +1,30 @@
 Giftola::Application.routes.draw do
   get "dashboard/index"
 
-  get "recipients/import_friends", as: '/import_friends'
+  get "recipients/import_friends", :as => '/import_friends'
 
-  root to: 'static_pages#home'
+  root :to => 'static_pages#home'
 
-  match 'auth/facebook/callback', to: 'sessions#create'
-  match 'auth/failure', to: redirect('/')
+  match 'auth/facebook/callback', :to => 'sessions#create'
+  match 'auth/failure', :to => redirect('/')
 
   resources :users, :only => [:show, :edit, :update]
 
-  #match '/recipients/import_friends', to: 'recipients#import_friends', as: '/import_friends'
+  # Facebook recommends a "Channel file." This is one way to implement it in Rails
+  get '/channel.html' => proc {
+    [
+      200,
+      {
+        'Pragma'        => 'public',
+        'Cache-Control' => "max-age=#{1.year.to_i}",
+        'Expires'       => 1.year.from_now.to_s(:rfc822),
+        'Content-Type'  => 'text/html'
+      },
+      ['<script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>']
+    ]
+  }
 
-  # The priority is based upon order of creation:
+  # The priority is based upon order of creati
   # first created -> highest priority.
 
   # Sample of regular route:
