@@ -1,0 +1,15 @@
+window.fbAsyncInit = function() {
+  FB.init({
+    appId   : <%= ENV['FACEBOOK_KEY'] %>,
+    channelUrl: <%= "'//localhost:3000/channel.html'," unless Rails.env.production? %>
+    status  : true,
+    cookie  : true,
+    xfbml   : true
+  })
+
+  FB.getLoginStatus(function(response){
+    FB.api("/me/friends?" + response.authResponse.accessToken, function(friends){
+      console.log(friends)
+    })
+  })
+}

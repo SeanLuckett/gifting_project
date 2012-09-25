@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.7'
+gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -10,7 +10,7 @@ gem 'haml'
 gem 'haml-rails', group: :development
 gem 'annotate', group: :development
 gem 'omniauth-facebook'
-gem 'koala'
+gem 'requirejs-rails'
 
 group :test do
   gem 'database_cleaner', "~> 0.7.2"
@@ -19,6 +19,10 @@ group :test do
   gem 'capybara', ">= 1.1.2"
   gem 'launchy', ">= 2.1.0"
   gem 'debugger'
+end
+
+group :development, :test do
+  gem 'jasmine-rails'
 end
 
 # Gems used only for assets and not required

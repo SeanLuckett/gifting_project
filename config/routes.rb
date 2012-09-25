@@ -24,6 +24,8 @@ Giftola::Application.routes.draw do
     ]
   }
 
+
+  mount JasmineRails::Engine => "specs/" unless Rails.env.production?
   # The priority is based upon order of creati
   # first created -> highest priority.
 
