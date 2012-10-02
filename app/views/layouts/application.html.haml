@@ -3,7 +3,6 @@
   %head
     %title= full_title(yield(:title))
     = stylesheet_link_tag    "application", :media => "all"
-    = requirejs_include_tag "application" 
     = csrf_meta_tags 
 
   %body
@@ -11,3 +10,5 @@
       - flash.each do |key, value|
         = content_tag(:div, value, class: "alert alert-#{key}")
       = yield
+
+    = requirejs_include_tag "application" 

@@ -1,2 +1,4 @@
 paths:
   models: "models"
+  views:  "views"
+  collections: "collections"

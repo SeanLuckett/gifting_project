@@ -1,5 +1,21 @@
-define(['backbone'], function(Backbone){
-  var Friend = Backbone.Model.extend({}) 
+define([
+  'backbone'
+  , 'views/friend'
+], function( Backbone, FriendView ){
+  
+  var Friend = Backbone.Model.extend({
+    initialize: function(){
+      this.view = new FriendView({ model: this });
+    },
 
-  return Friend
-})
+    defaults: {
+      selected: false
+    },
+
+    toggleSelectFriend: function(){
+      this.model.set( 'selected', !this.selected );
+    }
+  });
+
+  return Friend;
+});
