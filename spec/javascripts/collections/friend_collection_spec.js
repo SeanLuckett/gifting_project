@@ -24,30 +24,9 @@ require([
     });
 
     it("can add a friend", function(){
-      friends.add(new Friend());
+      friends.add(new Friend({ id: 1 }));
       expect(friends.length).toEqual(1);
     });
 
-    it("can return just selected friends", function(){
-      friend_1 = new Friend({ selected: true });
-      friend_2 = new Friend({ selected: true });
-      friend_3 = new Friend({ selected: false });
-      friends.add([friend_1, friend_2, friend_3]);
-
-      selected_friends = friends.getSelected();
-
-      expect(selected_friends.length).toEqual(2);
-    });
-
-    it("can return just unselected friends", function(){
-      friend_1 = new Friend({ selected: true });
-      friend_2 = new Friend({ selected: true });
-      friend_3 = new Friend({ selected: false });
-      friends.add([friend_1, friend_2, friend_3]);
-
-      selected_friends = friends.getUnselected();
-
-      expect(selected_friends.length).toEqual(1);
-    });
   });
 });

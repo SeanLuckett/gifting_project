@@ -5,13 +5,17 @@ define([
   
   var FriendCollection = Backbone.Collection.extend({
     model: Friend,
-
-    getSelected: function() {
-      return this.where({ "selected": true })
+    url: function(){
+      var user_id = $("#friends-list ul").data("user_id");
+      return '/users/' + user_id +  '/recipients';
     },
 
-    getUnselected: function() {
-      return this.where({ "selected": false })
+    getChosen: function() {
+      return this.where({ "user_chosen": true })
+    },
+
+    getNotChosen: function() {
+      return this.where({ "user_chosen": false })
     }
   });
 

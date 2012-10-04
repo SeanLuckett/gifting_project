@@ -14,6 +14,7 @@
 #
 
 class User < ActiveRecord::Base
+  has_many :recipients
   attr_accessible :email
 
   def self.from_omniauth(auth)

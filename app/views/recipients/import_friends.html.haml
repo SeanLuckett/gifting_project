@@ -1,8 +1,16 @@
-%h1 Import your Facebook friends
+%div.row
+  %h2 Import your Facebook friends
+
 #fb-root.fb_reset
 = render "fb_graph_api"
 
-%ul#friends-list Loading...
+%div.row.panel
+  %div.four.columns.centered
+    #friends-list
+      %form
+        %ul.two-up{:data => { :user_id => @user.id}}
+        %button{type: "submit", class: "form button"}
+          Submit
 
 
 

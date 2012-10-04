@@ -8,8 +8,8 @@ require(['models/friend'], function( Friend ){
     });
 
     it("is not selected", function(){
-      expect(friend.get('selected')).toBeDefined();
-      expect(friend.get('selected')).toBeFalsy();
+      expect(friend.get('user_chosen')).toBeDefined();
+      expect(friend.get('user_chosen')).toBeFalsy();
     });
 
     it("has a view", function(){

@@ -1,6 +1,6 @@
 define([
-  'backbone'
-  , 'tpl!templates/friends_collection.html'
+  'backbone', 
+  'tpl!templates/friends_collection.html',
 ], function(Backbone, friendTemplate){
 
 /*
@@ -9,31 +9,31 @@ define([
 */
 
   var FriendView = Backbone.View.extend({
-    tagName: 'li',
+    tagName: 'label',
     className: 'fb-friend',
 
     initialize: function(){
-      $('#friends-list').append( this.render() );
+      $('#friends-list ul').append( this.render() );
 
       this.model.on('change', this.render, this);
 
-      this.model.on('change:selected', function(model, selected){
-        this.$el[ selected ? 'addClass' : 'removeClass' ]('selected');
+      this.model.on('change:user_chosen', function(model, user_chosen){
+        this.$el[ user_chosen ? 'addClass' : 'removeClass' ]('user-chosen');
       }, this);
     },
 
     render: function(){
-      this.$el.html( this.template(this.model.toJSON()) );
+    this.$el.html( this.template({ friend: this.model.toJSON() }) );
       return this.el;
     },
 
     template: friendTemplate,
     events: {
-      'change input': 'selected'
+      'change input': 'user_chosen'
     },
 
-    selected: function(e){
-      this.model.toggleSelectFriend();
+    user_chosen: function(e){
+      this.model.toggleChooseFriend();
     }
   });
 

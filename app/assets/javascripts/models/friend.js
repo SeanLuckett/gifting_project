@@ -1,6 +1,6 @@
 define([
-  'backbone'
-  , 'views/friend'
+  'backbone',
+  'views/friend'
 ], function( Backbone, FriendView ){
   
   var Friend = Backbone.Model.extend({
@@ -9,11 +9,11 @@ define([
     },
 
     defaults: {
-      selected: false
+      user_chosen: false
     },
 
-    toggleSelectFriend: function(){
-      this.model.set( 'selected', !this.selected );
+    toggleChooseFriend: function(){
+      this.set( 'user_chosen', !this.get("user_chosen") );
     }
   });
 

@@ -8,7 +8,9 @@ Giftola::Application.routes.draw do
   match 'auth/facebook/callback', :to => 'sessions#create'
   match 'auth/failure', :to => redirect('/')
 
-  resources :users, :only => [:show, :edit, :update]
+  resources :users, :only => [:show, :edit, :update] do
+    resources :recipients
+  end
 
   # Facebook recommends a "Channel file." This is one way to implement it in Rails
   get '/channel.html' => proc {
