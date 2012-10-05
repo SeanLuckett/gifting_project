@@ -14,5 +14,5 @@
 
 class Recipient < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :birthday, :image, :name, :fb_id, :user_id
+  attr_accessible :birthday, :image, :name, :fb_id
 end
