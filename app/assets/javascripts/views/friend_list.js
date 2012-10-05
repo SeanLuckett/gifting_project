@@ -9,14 +9,16 @@ define([
       "submit form": "save_chosen_friends"
     },
     save_chosen_friends: function(e){
-      // figure out what this sends and see if controller can iterate on it
-      // Backbone.sync("create", this.collection)
       var chosen_friends = this.collection.getChosen();
 
-      _.each(chosen_friends, function(friend){
-        delete( friend.user_chosen );
-        Backbone.sync("create", friend);
+      $.when(function(){
+        _.each(chosen_friends, function(friend){
+          Backbone.sync("create", friend);
+        });
+      }).then(function(){
+        window.location = "/dashboard/index";
       });
+
       return false;
     }
   });
