@@ -6,7 +6,7 @@ class RecipientsController < ApplicationController
   def create
     user = User.find(params[:user_id])
     rec = user.recipients.new(pick(params, :fb_id, :birthday, :name, :image))
-    rec.save!
+    rec.save! unless Recipient.find_by_fb_id(rec.fb_id)
 
     respond_to do |format|
       format.json { render :json => user.recipients }

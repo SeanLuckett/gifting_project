@@ -11,7 +11,6 @@ require([
     fb_obj.fb_id = fb_obj.id;
     delete( fb_obj.id );
 
-    // fb_obj.user_id = $("#friends-list ul").data("user_id");
     fb_obj.image = "https://graph.facebook.com/" + fb_obj.fb_id + "/picture";
 
     return fb_obj;
