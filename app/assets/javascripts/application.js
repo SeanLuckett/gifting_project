@@ -25,8 +25,9 @@ require([
       });
 
       window.Friends =  new FriendsList({ collection: collection });
-    }, function(){
+    }, function(e){
       // error msg produced by FB.getLoginStatus
+      console.log(e);
     });
   }
 });

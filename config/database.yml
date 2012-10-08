@@ -14,12 +14,14 @@
 #
 common: &common
   adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: localhost
   username: giftola
-  password:
+  password: Oskitty6
 
 development:
   <<: *common
-  encoding: unicode
   database: giftola_development
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -42,6 +44,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *common
+  host: localhost
+  pool: 5
   encoding: unicode
   database: giftola_test
 

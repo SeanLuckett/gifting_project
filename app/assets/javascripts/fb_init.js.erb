@@ -14,7 +14,11 @@
 
     FB.getLoginStatus(function(response){
       FB.api("/me/friends?fields=name,email,birthday", function(friends){
-        dfd.resolve( friends.data );
+        if (friends.data.length > 0) {
+          dfd.resolve( friends.data );
+        } else {
+          dfd.reject( "Something went wrong getting information on your Facebook friends.  Either you don't have any, yet or there was an error.  Try refreshing the page." );
+        }
       });
     });
   };
