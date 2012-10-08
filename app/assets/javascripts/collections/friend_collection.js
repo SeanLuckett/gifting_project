@@ -1,6 +1,6 @@
 define([
-  'backbone'
-  , 'models/friend'
+  'backbone',
+  'models/friend'
 ], function( Backbone, Friend ){
   
   var FriendCollection = Backbone.Collection.extend({
@@ -11,11 +11,11 @@ define([
     },
 
     getChosen: function() {
-      return this.where({ "user_chosen": true })
+      return this.where({ "user_chosen": true });
     },
 
     getNotChosen: function() {
-      return this.where({ "user_chosen": false })
+      return this.where({ "user_chosen": false });
     }
   });
 

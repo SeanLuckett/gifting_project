@@ -24,6 +24,7 @@ require([
       });
 
       window.Friends =  new FriendsList({ collection: collection });
+      
     }, function(e){
       // error msg produced by FB.getLoginStatus
       var msg = '<h4>' + e + '</h4>';
