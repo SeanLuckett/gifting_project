@@ -1,10 +1,9 @@
 require([
-  'underscore'
-  , 'backbone'
-  , 'views/friend_list'
-  , 'collections/friend_collection'
-  , 'models/friend'
-
+  'underscore',
+  'backbone',
+  'views/friend_list',
+  'collections/friend_collection',
+  'models/friend'
 ], function(_, Backbone, FriendsList, FriendsCollection, Friend){
 
   window.init_facebook_data = function(fb_obj){
@@ -27,7 +26,7 @@ require([
       window.Friends =  new FriendsList({ collection: collection });
     }, function(e){
       // error msg produced by FB.getLoginStatus
-      var msg = '<h4>' + e + '</h4>'
+      var msg = '<h4>' + e + '</h4>';
       $("#fb-root").html(msg);
     });
   }
