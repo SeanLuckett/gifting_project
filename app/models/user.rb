@@ -29,4 +29,8 @@ class User < ActiveRecord::Base
       user.save!
     end
   end
+
+  def send_welcome_email
+    Welcomer.welcome_new_user(self).deliver
+  end
 end

@@ -17,5 +17,10 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { FactoryGirl.create(:user)}
+
+  it "sends a welcome email" do
+    subject.send_welcome_email
+    ActionMailer::Base.deliveries.last.to.should == [subject.email]
+  end
 end

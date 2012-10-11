@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Welcomer do
-  describe '#welcome_new_user' do
+  describe '#welocme_new_user' do
     let(:user) { mock_model(User, :name => 'Matty McTester',
                                   :email => 'tester@email.com') }
     let(:mail) { Welcomer.welcome_new_user(user) }
@@ -16,6 +16,10 @@ describe Welcomer do
 
     it "renders the sender email" do
       mail.from.should == ['noreply@giftola.com']
+    end
+
+    it "assigns @name" do
+      mail.body.encoded.should match("Matty")
     end
   end
 end

@@ -5,6 +5,7 @@ FactoryGirl.define do
     provider "MyString"
     uid "MyString"
     name "MyString"
+    email "test@example.com"
     oauth_token "MyString"
     oauth_expires_at "2012-09-07 13:32:23"
   end

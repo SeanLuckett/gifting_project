@@ -13,6 +13,10 @@
     });
 
     FB.getLoginStatus(function(response){
+      if( response && response.status == 'connected' ) {
+          window.location = "/dashboard/index";
+      };
+
       FB.api("/me/friends?fields=name,email,birthday", function(friends){
         if (friends.data.length > 0) {
           dfd.resolve( friends.data );
@@ -20,7 +24,6 @@
           dfd.reject( "Something went wrong getting information on your Facebook friends.  Either you don't have any, yet or there was an error.  Try refreshing the page." );
         }
       });
-    });
-  };
+    };
 
 })(jQuery);
