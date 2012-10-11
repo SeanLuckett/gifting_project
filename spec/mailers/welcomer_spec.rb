@@ -13,5 +13,9 @@ describe Welcomer do
     it "renders the receiver email" do
       mail.to.should ==[user.email]
     end
+
+    it "renders the sender email" do
+      mail.from.should == ['noreply@giftola.com']
+    end
   end
 end
