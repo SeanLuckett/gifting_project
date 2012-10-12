@@ -1,0 +1,83 @@
+define([
+  'underscore',
+  'backbone',
+  'collections/friend_collection',
+  'views/friend_list',
+  'models/friend'
+
+], function(_, Backbone, FriendsCollection, FriendsList, Friend) {
+  
+  return {
+    init: function(){
+      this.provide_fb_callback();
+      this.process_fb_response();
+    },
+  
+    init_facebook_data: function(fb_obj){
+      // Facebook delivers the goods in either the wrong format or missing attributes
+      // This changes the id attr to fb_id so Backbone recognizes it as a new model.
+      // It also creates an http request for the friend's image/avatar
+
+      fb_obj.fb_id = fb_obj.id;
+      delete( fb_obj.id );
+
+      fb_obj.image = "https://graph.facebook.com/" + fb_obj.fb_id + "/picture";
+
+      return fb_obj;
+    },
+  
+    provide_fb_callback: function() {
+      var dfd = $.Deferred();
+      this.fb_friends = dfd.promise();
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId   : <%= ENV['FACEBOOK_KEY'] %>,
+          channelUrl: <%= "'//localhost:3000/channel.html'" unless Rails.env.production? %>,
+          status  : true,
+          cookie  : true,
+          xfbml   : true
+        });
+
+        FB.getLoginStatus(function(response){
+          FB.api("/me/friends?fields=name,email,birthday", function(friends){
+            if (friends.data.length > 0) {
+              dfd.resolve( friends.data );
+            } else {
+              dfd.reject( "Something went wrong getting information on your Facebook friends.  Either you don't have any, yet or there was an error.  Try refreshing the page." );
+            }
+          });
+        });
+      };
+      // Include Facebook Javascript API
+      // Guaranteed to run after fbAsyncInit is loaded
+      var d = window.document;
+      var js, id = 'facebook-jssdk'
+      if (d.getElementById(id)) {return}
+      js = d.createElement('script')
+      js.id = id
+      js.async = true
+      js.src = "//connect.facebook.net/en_US/all.js"
+      d.getElementsByTagName('head')[0].appendChild(js)
+    },
+
+    process_fb_response: function() {
+      this.fb_friends.then(function( friends ){
+        var collection = new FriendsCollection();
+
+        _.each( friends,function( friend ){
+          collection.add( Giftola.FB.init_facebook_data( friend ) );
+        });
+
+        window.Friends =  new FriendsList( { collection: collection } );
+        
+      }, function( e ){
+        // error msg produced by FB.getLoginStatus
+        var msg = '<h4>' + e + '</h4>';
+        $("#fb-root").html(msg);
+      });
+    }
+  }
+
+});
+
