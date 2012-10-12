@@ -3,9 +3,9 @@ define([
   'backbone',
   'collections/friend_collection',
   'views/friend_list',
-  'models/friend'
-
-], function(_, Backbone, FriendsCollection, FriendsList, Friend) {
+  'models/friend',
+  'giftola'
+], function(_, Backbone, FriendsCollection, FriendsList, Friend, Giftola) {
   
   return {
     init: function(){
@@ -62,14 +62,15 @@ define([
     },
 
     process_fb_response: function() {
+      var _this = this;
       this.fb_friends.then(function( friends ){
         var collection = new FriendsCollection();
 
         _.each( friends,function( friend ){
-          collection.add( Giftola.FB.init_facebook_data( friend ) );
+          collection.add( _this.init_facebook_data( friend ) );
         });
 
-        window.Friends =  new FriendsList( { collection: collection } );
+        Giftola.Friends =  new FriendsList( { collection: collection } );
         
       }, function( e ){
         // error msg produced by FB.getLoginStatus
