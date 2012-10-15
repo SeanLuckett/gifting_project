@@ -6,14 +6,15 @@ define([
   var FriendsView = Backbone.View.extend({
     el: $('#friends-list'),
     events: {
-      "submit form": "save_chosen_friends"
+      "submit form": "saveChosenFriends"
     },
-    save_chosen_friends: function(e){
-      var chosen_friends = this.collection.getChosen();
+    saveChosenFriends: function(e){
+      var chosenFriends = this.collection.getChosen();
 
       $.when(function(){
-        _.each(chosen_friends, function(friend){
+        _.each(chosenFriends, function(friend){
           Backbone.sync("create", friend);
+          console.log(friend);
         });
       }).then(function(){
         window.location = "/dashboard/index";

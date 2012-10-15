@@ -9,26 +9,26 @@ define([
   
   return {
     init: function(){
-      this.provide_fb_callback();
-      this.process_fb_response();
+      this.provideFacebookCallback();
+      this.processFBResponse();
     },
   
-    init_facebook_data: function(fb_obj){
+    initFacebookData: function(fbBlob){
       // Facebook delivers the goods in either the wrong format or missing attributes
       // This changes the id attr to fb_id so Backbone recognizes it as a new model.
       // It also creates an http request for the friend's image/avatar
 
-      fb_obj.fb_id = fb_obj.id;
-      delete( fb_obj.id );
+      fbBlob.fb_id = fbBlob.id;
+      delete( fbBlob.id );
 
-      fb_obj.image = "https://graph.facebook.com/" + fb_obj.fb_id + "/picture";
+      fbBlob.image = "https://graph.facebook.com/" + fbBlob.fb_id + "/picture";
 
-      return fb_obj;
+      return fbBlob;
     },
   
-    provide_fb_callback: function() {
+    provideFacebookCallback: function() {
       var dfd = $.Deferred();
-      this.fb_friends = dfd.promise();
+      this.fbFriends = dfd.promise();
 
       window.fbAsyncInit = function() {
         FB.init({
@@ -61,13 +61,13 @@ define([
       d.getElementsByTagName('head')[0].appendChild(js)
     },
 
-    process_fb_response: function() {
+    processFBResponse: function() {
       var _this = this;
-      this.fb_friends.then(function( friends ){
+      this.fbFriends.then(function( friends ){
         var collection = new FriendsCollection();
 
         _.each( friends,function( friend ){
-          collection.add( _this.init_facebook_data( friend ) );
+          collection.add( _this.initFacebookData( friend ) );
         });
 
         Giftola.Friends =  new FriendsList( { collection: collection } );
@@ -81,4 +81,3 @@ define([
   }
 
 });
-
