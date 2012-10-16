@@ -16,7 +16,7 @@ define([
           dfds.push(friend.save());
         });
       $.when( dfds ).then(function(){
-        window.location = "/dashboard/index";
+        // window.location = "/dashboard/index";
       });
 
       return false;
