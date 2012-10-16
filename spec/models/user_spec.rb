@@ -24,4 +24,20 @@ describe User do
     ActionMailer::Base.deliveries.last.to.should == [subject.email]
     expect{ subject.send_welcome_email }.to change{ ActionMailer::Base.deliveries.count }.by(1)
   end
+
+  context "when saving new users" do
+    it "saves a new user" do
+      pending
+      set_omniauth
+      user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
+    end
+
+  context "when saving an existing user"
+    it "finds a user already in db" do
+      pending
+      set_omniauth
+      user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
+      expect{ click_link("Sign in with Facebook") }.not_to change{ User.count }.by(1)
+    end
+  end
 end

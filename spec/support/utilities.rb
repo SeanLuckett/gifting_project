@@ -5,4 +5,3 @@ def sign_in_facebook_user
   visit root_path
   click_link("Sign in with Facebook")
 end
-
