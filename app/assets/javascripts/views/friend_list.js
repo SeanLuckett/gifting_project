@@ -10,13 +10,12 @@ define([
     },
     saveChosenFriends: function(e){
       var chosenFriends = this.collection.getChosen();
+      var dfds = [];
 
-      $.when(function(){
         _.each(chosenFriends, function(friend){
-          Backbone.sync("create", friend);
-          console.log(friend);
+          dfds.push(friend.save());
         });
-      }).then(function(){
+      $.when( dfds ).then(function(){
         window.location = "/dashboard/index";
       });
 
