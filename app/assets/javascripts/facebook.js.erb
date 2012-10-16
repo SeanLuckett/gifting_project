@@ -33,7 +33,7 @@ define([
       window.fbAsyncInit = function() {
         FB.init({
           appId   : <%= ENV['FACEBOOK_KEY'] %>,
-          channelUrl: <%= "'//localhost:3000/channel.html'" unless Rails.env.production? %>,
+          channelUrl: <%= "'//localhost:3000/channel.html'," unless Rails.env.production? %>
           status  : true,
           cookie  : true,
           xfbml   : true
