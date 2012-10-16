@@ -22,5 +22,6 @@ describe User do
   it "sends a welcome email" do
     subject.send_welcome_email
     ActionMailer::Base.deliveries.last.to.should == [subject.email]
+    expect{ subject.send_welcome_email }.to change{ ActionMailer::Base.deliveries.count }.by(1)
   end
 end

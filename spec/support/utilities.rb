@@ -1,6 +1,6 @@
 include ApplicationHelper
 
-def sign_in_user
+def sign_in_facebook_user
   set_omniauth
   visit root_path
   click_link("Sign in with Facebook")
