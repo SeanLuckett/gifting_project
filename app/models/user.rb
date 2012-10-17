@@ -16,11 +16,13 @@
 class User < ActiveRecord::Base
   has_many :recipients
   attr_accessible :email
+  after_save :send_welcome_email
 
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
+    user = self.find_by_uid(auth[:uid])
+    return user if user
+
+    where(auth.slice(:uid)).new.tap do |user|
       user.name = auth.info.name
       user.image = auth.info.image
       user.email = auth.info.email

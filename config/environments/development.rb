@@ -35,3 +35,11 @@ Giftola::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 end
+
+silence_warnings do
+  begin
+    require 'pry'
+    IRB = Pry
+  rescue LoadError
+  end
+end

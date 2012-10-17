@@ -23,6 +23,7 @@ end
 
 group :development, :test do
   gem 'jasmine-rails'
+  gem 'pry'
 end
 
 # Gems used only for assets and not required
