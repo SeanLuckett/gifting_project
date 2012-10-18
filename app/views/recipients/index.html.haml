@@ -1,0 +1,24 @@
+.row
+  #logo
+    =image_tag("http://www.placekitten.com/150/150")
+  %ul.breadcrumb.rec-crumbs
+    %li
+      = link_to "Dashboard", dashboard_index_path(@user)
+      %span.divider /
+    %li.active Recipients 
+
+.row
+  .span3
+  .span4
+    %h3 Select a recipient to edit
+  .span3
+
+.row
+  .span3
+  .span4
+    - @recipients.each do |r|
+      #recipient.well.well-large
+        .rec-pic= image_tag(r.image)
+        %h4= r.name
+
+  .span3

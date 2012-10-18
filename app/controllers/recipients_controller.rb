@@ -6,8 +6,10 @@ class RecipientsController < ApplicationController
   end
 
   def index
+    @user = current_user
+    @recipients = @user.recipients
   end
-  
+
   def create
     user = User.find(params[:user_id])
     rec = user.recipients.new(params.slice(:fb_id, :birthday, :name, :image))
