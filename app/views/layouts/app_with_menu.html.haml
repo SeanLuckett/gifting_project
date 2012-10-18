@@ -23,11 +23,17 @@
           /   %span.icon-bar
           /   %span.icon-bar
           %a.brand(href="#") Giftola
+          .container.nav-collapse
+            %ul.nav.pull-right
+              %li= link_to "Dashboard", dashboard_index_path
+              %li= link_to "Profile", user_path(@user) 
+              %li= link_to "Support", '#'
+              %li= link_to "Logout", '#'
 
     .container
       .row
         .span9
-          -#= bootstrap_flash
+          = bootstrap_flash
           - flash.each do |key, value|
             = content_tag(:div, value, class: "alert alert-#{key}")
 

@@ -1,2 +1,6 @@
-%nav#main
-  = link_to "Profile", user_path(@user)
+.row
+  #logo
+    =image_tag("http://www.placekitten.com/150/150")
+  %h1 Dashboard
+.row
+  .btn= link_to "Manage Recipients", user_recipients_path(@user)

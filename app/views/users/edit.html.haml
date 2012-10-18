@@ -1,7 +1,7 @@
 - provide(:title, "Edit your profile")
-%section#user_name
-  #user_image= image_tag(@user.image)
-  %h1
+#user_image= image_tag(@user.image)
+%div
+  %h3
     = @user.name
   =form_for @user do |f|
     = f.text_field :email, value: @user.email || "enter email address"

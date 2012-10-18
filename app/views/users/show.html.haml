@@ -1,9 +1,9 @@
 - provide(:title, @user.name)
-%section#user_name
-  #user_image= image_tag(@user.image)
-  %h1
-    = @user.name
+#user_image= image_tag(@user.image)
+%div
   %h3
+    = @user.name
+  %h5
     = @user.email if @user.email 
     = link_to("change", edit_user_path(@user))
 

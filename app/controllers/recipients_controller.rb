@@ -1,8 +1,13 @@
 class RecipientsController < ApplicationController
+  layout 'app_with_menu'
+
   def import_friends
     @user = current_user
   end
 
+  def index
+  end
+  
   def create
     user = User.find(params[:user_id])
     rec = user.recipients.new(params.slice(:fb_id, :birthday, :name, :image))

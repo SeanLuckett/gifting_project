@@ -3,13 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #user_image {
   float: left;
+  clear:right;
   margin-right: 10px
-}
-
-#user_address {
-  margin-top: 60px
-}
-
-.attr_heading {
-  font-weight: bold
 }
