@@ -2,12 +2,12 @@
 #fb-root.fb_reset
 
 %div.row
-  %h3 Import your Facebook friends
   %div.span6
+    %h3 Import your Facebook friends
     #friends-list
       %form
         %ul{:data => { :user_id => @user.id}}
-        %button{type: "submit", class: "btn btn-primary"}
+        %button.span2{type: "submit", class: "btn btn-primary"}
           Submit
 
 =javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"
