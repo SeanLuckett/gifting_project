@@ -1,16 +1,10 @@
 define([
   'backbone', 
-  'tpl!templates/friends_collection.html',
+  'tpl!templates/friends_collection.html'
 ], function(Backbone, friendTemplate){
-
-/*
-/*  To display friend profile pic:
-/*  <img src="graph.facebook.com/user_id/picture" />
-*/
 
   var FriendView = Backbone.View.extend({
     tagName: 'label',
-    className: 'fb-friend',
 
     initialize: function(){
       $('#friends-list ul').append( this.render() );
