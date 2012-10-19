@@ -7,7 +7,7 @@ class RecipientsController < ApplicationController
 
   def index
     @user = current_user
-    @recipients = @user.recipients
+    @recipients = @user.recipients.all
   end
 
   def create
@@ -18,7 +18,15 @@ class RecipientsController < ApplicationController
     respond_to do |format|
       format.json { render :json => user.recipients }
     end
+  end
 
+  def destroy
+    @recipient = Recipient.find(params[:id])
+    @recipient.destroy
+    redirect_to user_recipients_path(@user)
+    # respond_to do |format|
+    #   format.html {  }
+    # end
   end
 
 end

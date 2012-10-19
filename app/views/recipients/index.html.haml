@@ -19,6 +19,8 @@
     - @recipients.each do |r|
       #recipient.well.well-large
         .rec-pic= image_tag(r.image)
-        %h4= r.name
+        %h4
+          = r.name
+          %span.delete-rec.badge= link_to 'X', user_recipient_path(@user, r), :confirm => "Are you sure?", :method => :delete
 
   .span3
