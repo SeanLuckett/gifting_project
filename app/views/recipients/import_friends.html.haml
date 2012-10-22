@@ -3,11 +3,11 @@
 
 %div.row
   %div.span6
-    %h3 Import your Facebook friends
+    %h3.offset1 Import your Facebook friends
     #friends-list
       %form
         %ul{:data => { :user_id => @user.id}}
-        %button.span2{type: "submit", class: "btn btn-primary"}
+        %button.offset3.span2{type: "submit", class: "btn btn-primary"}
           Submit
 
 =javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"

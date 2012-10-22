@@ -5,7 +5,7 @@ define([
 
   var FriendView = Backbone.View.extend({
     tagName: 'label',
-    className: 'fb-friend',
+    className: 'well large-well fb-friend',
 
     initialize: function(){
       $('#friends-list ul').append( this.render() );
