@@ -34,9 +34,6 @@
       .row
         .span9
           = bootstrap_flash
-          - flash.each do |key, value|
-            = content_tag(:div, value, class: "alert alert-#{key}")
-
           = yield
 
     /
@@ -45,4 +42,5 @@
     / Placed at the end of the document so the pages load faster
     = javascript_include_tag "jquery"
     = javascript_include_tag "jquery_ujs"
+    = javascript_include_tag "twitter/bootstrap"
     = requirejs_include_tag "application" 

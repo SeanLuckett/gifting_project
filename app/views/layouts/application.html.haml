@@ -24,10 +24,7 @@
     .container
       .row
         .span9
-          -#= bootstrap_flash
-          - flash.each do |key, value|
-            = content_tag(:div, value, class: "alert alert-#{key}")
-
+          = bootstrap_flash
           = yield
 
     /

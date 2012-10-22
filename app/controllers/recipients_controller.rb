@@ -22,8 +22,9 @@ class RecipientsController < ApplicationController
 
   def destroy
     @recipient = Recipient.find(params[:id])
+    flash[:notice] = "You removed #{@recipient.name} from the list."
     @recipient.destroy
-    redirect_to user_recipients_path(@user)
+    redirect_to user_recipients_path(params[:user_id])
     # respond_to do |format|
     #   format.html {  }
     # end
