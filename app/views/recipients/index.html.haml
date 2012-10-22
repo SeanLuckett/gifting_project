@@ -14,13 +14,16 @@
   .span3
 
 .row
-  .span3
-  .span4
+  .span2
+  .span6
+    #new-import-recipients.pull-right
+      .btn= link_to "New", new_user_recipient_path(@user)
+
     - @recipients.each do |r|
-      #recipient.well.well-large
+      .recipient.well.well-large
         .rec-pic= image_tag(r.image)
         %h4
           = r.name
           %span.delete-rec.badge= link_to 'X', user_recipient_path(@user, r), :confirm => "Are you sure?", :method => :delete
 
-  .span3
+  .span2
