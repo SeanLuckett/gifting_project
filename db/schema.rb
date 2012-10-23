@@ -11,16 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121003214013) do
+ActiveRecord::Schema.define(:version => 20121022233152) do
 
   create_table "recipients", :force => true do |t|
     t.string   "fb_id"
     t.string   "name"
     t.string   "image"
     t.date     "birthday"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "user_id"
+    t.integer  "spend_at_least"
+    t.integer  "spend_at_most"
   end
 
   create_table "users", :force => true do |t|

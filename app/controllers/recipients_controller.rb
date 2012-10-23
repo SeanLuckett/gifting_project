@@ -1,5 +1,6 @@
 class RecipientsController < ApplicationController
   layout 'app_with_menu'
+  respond_to :html
 
   def import_friends
     @user = current_user
@@ -8,6 +9,12 @@ class RecipientsController < ApplicationController
   def index
     @user = current_user
     @recipients = @user.recipients.all
+  end
+
+  def new
+    @user = current_user
+    @recipient = @user.recipients.build
+    respond_with @recipient
   end
 
   def create

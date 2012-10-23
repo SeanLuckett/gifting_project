@@ -1,6 +1,14 @@
 // Place all the styles related to the Recipients controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#new-import-recipients {
+  margin-left: 10px;
+}
+
+.recipient {
+  margin-right: 75px
+}
+
 .user-chosen {
   background-color: #6CF;
 }
@@ -18,5 +26,5 @@
 .delete-rec {
   float: right;
   margin-right: -20px;
-  margin-top: -45px;
+  margin-top: -30px;
 }
