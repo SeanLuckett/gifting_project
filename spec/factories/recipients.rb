@@ -2,9 +2,10 @@
 
 FactoryGirl.define do
   factory :recipient do
-    uid "MyString"
-    name "MyString"
-    image "MyString"
-    birthday "2012-10-03"
+    id 1
+    fb_id 42
+    name "MyString McMystring"
+    image "/some/path_to/MyImage"
+    birthday { 21.years.ago }
   end
 end

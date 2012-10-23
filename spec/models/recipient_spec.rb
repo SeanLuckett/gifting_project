@@ -15,5 +15,13 @@
 require 'spec_helper'
 
 describe Recipient do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { FactoryGirl.create(:recipient)}
+
+  it { should respond_to(:birthday) }
+  it { should respond_to(:image) }
+  it { should respond_to(:name) }
+  it { should respond_to(:fb_id) }
+  it { should respond_to(:user_id) }
+
+  it { should be_valid }
 end
