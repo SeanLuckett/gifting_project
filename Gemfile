@@ -24,6 +24,8 @@ end
 group :development, :test do
   gem 'jasmine-rails'
   gem 'pry'
+  gem 'guard-rspec'
+  gem 'rb-fsevent', '~> 0.9.1'
 end
 
 # Gems used only for assets and not required

@@ -5,7 +5,7 @@ describe "Dashboard" do
 
   describe "index page" do
     before do
-      sign_in_user
+      sign_in_facebook_user
       visit "/dashboard/index"
     end
 

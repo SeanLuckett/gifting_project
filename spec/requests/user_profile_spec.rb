@@ -12,8 +12,8 @@ describe "profile page" do
   context "when viewing" do
 
     it { should have_selector('title', text: user.name) }
-    it { should have_selector('h1',    text: user.name) }
-    it { should have_selector('h3',    text: user.email) }
+    it { should have_selector('h3',    text: user.name) }
+    it { should have_selector('h5',    text: user.email) }
     # investigate !xpath
     it { should have_selector(:xpath, "//img[@src='#{user.image}']") }
     it { should have_link('change',    href: "/users/#{user.id}/edit") }
