@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121022233152) do
+ActiveRecord::Schema.define(:version => 20121024210536) do
+
+  create_table "personas", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "personas_recipients", :id => false, :force => true do |t|
+    t.integer "persona_id"
+    t.integer "recipient_id"
+  end
+
+  add_index "personas_recipients", ["persona_id", "recipient_id"], :name => "index_personas_recipients_on_persona_id_and_recipient_id"
+  add_index "personas_recipients", ["recipient_id", "persona_id"], :name => "index_personas_recipients_on_recipient_id_and_persona_id"
 
   create_table "recipients", :force => true do |t|
     t.string   "fb_id"
