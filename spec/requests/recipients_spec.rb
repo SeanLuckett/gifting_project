@@ -25,4 +25,32 @@ describe "Recipients" do
       end
     end
   end
+
+  describe "#new" do
+    before :each do
+      visit user_recipients_path(user)
+
+      click_link "New"
+      fill_in "recipient[name]", :with => "Joseph P. Tester"
+      select('October', :from => 'recipient[birthday(2i)]')
+      select('16', :from => 'recipient[birthday(3i)]')
+      select('1980', :from => 'recipient[birthday(1i)]')
+      fill_in "recipient[spend_at_least]", :with => "5"
+      fill_in "recipient[spend_at_most]", :with => "25"
+    end
+
+    it "creates a new recipient" do
+      expect { click_button 'Done' }.to change(Recipient, :count).by(1)
+    end
+
+    it "shows the created recipient" do
+      click_button 'Done'
+      page.should have_content "Joseph P. Tester"
+    end
+
+    it "notifies user of success" do
+      click_button 'Done'
+      page.should have_content "Recipient successfully created."
+    end
+  end
 end

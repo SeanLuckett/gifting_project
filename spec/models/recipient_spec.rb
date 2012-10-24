@@ -26,4 +26,9 @@ describe Recipient do
   it { should respond_to(:user_id) }
 
   it { should be_valid }
+
+  describe "when name isn't present" do
+    before { subject.name = " "}
+    it { should_not be_valid }
+  end
 end

@@ -17,18 +17,33 @@
       = bootstrap_flash
 
     #div.control-group
-      = rec.label 'What do you want to call this person?'
+      %p.field-description What do you want to call this person?
+      = rec.label :name
       = rec.text_field :name
 
     #div.control-group
-      = rec.label 'If you want to send birthday gifts, enter birth day:'
-      = rec.date_select :birthday, {:start_year => Time.now.year - 90, :order => [:month, :day, :year]}, {:class => 'input-medium'}
+      %p.field-description If you want to send birthday gifts, enter birthday:
+      = rec.label :birthday
+      = rec.date_select :birthday, {:start_year => Time.now.year - 90, :order => [:month, :day, :year], :include_blank => true}, {:class => 'input-medium'}
 
     #div.control-group
-      = rec.label 'In general, how much would you like spend on gifts for this person? (You can set event-specific limits on each event, if different)'
+      %p.field-description How much would you like spend on gifts for this person?
+      = rec.label :spend_at_least
+      %div.input-prepend.input-append
+        %span.add-on $
+        = rec.text_field :spend_at_least, :class => 'input-mini'
+        %span.add-on .00
+      = rec.label :spend_at_most
+      %div.input-prepend.input-append
+        %span.add-on $
+        = rec.text_field :spend_at_most, :class => 'input-mini'
+        %span.add-on .00
 
     #div.control-group
-    / This is where spending limits go when you're done modeling them
-    / twitter-bootstrap has a thing to put dollar sign on left side of field
+      %p.field-description Personas describe common interests for many of a type. Select one or more to describe this person. You can do this any time.
+      
 
     #div.control-group
+      %p.field-description Do you have an event in mind for this person?  Select as many as you'd like, and I'll recommend gifts when the date is nigh. You will be able to add custom events, too.
+
+    = rec.button "Done", :class => 'btn'

@@ -14,15 +14,34 @@ class RecipientsController < ApplicationController
   def new
     @user = current_user
     @recipient = @user.recipients.build
+
     respond_with @recipient
   end
 
   def create
     user = User.find(params[:user_id])
-    rec = user.recipients.new(params.slice(:fb_id, :birthday, :name, :image))
-    rec.save! unless Recipient.find_by_fb_id(rec.fb_id)
 
-    respond_to do |format|
+    if params[:fb_id].present?
+      create_from_facebook(user)
+    else
+      @recipient = user.recipients.new(params[:recipient])
+
+      respond_to do |format|
+        if @recipient.save
+          format.html { redirect_to user_recipients_path(user), notice: "Recipient successfully created." }
+        else
+          format.html { render action: "new"}
+        end
+      end
+      
+    end
+  end
+
+  def create_from_facebook(user)
+    rec = user.recipients.new(params.slice(:fb_id, :birthday, :name, :image))
+    rec.save! unless Recipient.find_by_fb_id_and_user_id(rec.fb_id, user.id)
+
+    respond_to do |format| 
       format.json { render :json => user.recipients }
     end
   end

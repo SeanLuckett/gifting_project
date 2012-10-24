@@ -16,5 +16,15 @@
 
 class Recipient < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :birthday, :image, :name, :fb_id
+  attr_accessible :birthday, :image, :name, :fb_id, :spend_at_least, :spend_at_most
+
+  validates :name, presence: true
+
+  # Right now, this is all kinds of kittens
+  # Change at some point
+  before_save do |recipient|
+    if recipient.image.blank?
+      recipient.image = "http://www.placekitten.com/50/50"
+    end
+  end
 end
