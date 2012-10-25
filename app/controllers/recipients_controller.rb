@@ -13,6 +13,7 @@ class RecipientsController < ApplicationController
 
   def new
     @user = current_user
+    @personas = Persona.all
     @recipient = @user.recipients.build
 
     respond_with @recipient

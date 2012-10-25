@@ -28,6 +28,9 @@ describe "Recipients" do
 
   describe "#new" do
     before :each do
+      @personas = [FactoryGirl.create(:persona, :title => "Nerd"),
+                   FactoryGirl.create(:persona, :title => "Giant")]
+      # @event = FactoryGirl.create(:event)
       visit user_recipients_path(user)
 
       click_link "New"
@@ -52,5 +55,32 @@ describe "Recipients" do
       click_button 'Done'
       page.should have_content "Recipient successfully created."
     end
+
+    context "when associating personas" do
+
+      it "associates a persona" do
+        check("#{@personas[0].title}")
+        click_button 'Done'
+        user.recipients.first.personas.count.should == 1
+      end
+
+      it "associates several personas" do
+        check("#{@personas[0].title}")
+        check("#{@personas[1].title}")
+        click_button 'Done'
+
+        user.recipients.first.personas.count.should == 2
+      end
+    end
+
+    context "when associating events" do
+
+      it "associates an event" do
+        # check("#{@event.title}")
+        # click_button 'Done'
+        # user.recipients.first.events.count.should == 1
+      end
+    end
+
   end
 end

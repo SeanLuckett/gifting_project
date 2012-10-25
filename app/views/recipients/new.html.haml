@@ -39,9 +39,11 @@
         = rec.text_field :spend_at_most, :class => 'input-mini'
         %span.add-on .00
 
-    #div.control-group
-      %p.field-description Personas describe common interests for many of a type. Select one or more to describe this person. You can do this any time.
-      
+    %p.field-description Personas describe common interests for many of a type. Select one or more to describe this person. You can do this any time.
+    - @personas.each do |persona|
+      %label.checkbox
+        #{persona.title}
+        = check_box_tag "recipient[persona_ids][]", persona.id, @recipient.personas.include?(persona)
 
     #div.control-group
       %p.field-description Do you have an event in mind for this person?  Select as many as you'd like, and I'll recommend gifts when the date is nigh. You will be able to add custom events, too.
