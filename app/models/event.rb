@@ -11,6 +11,7 @@
 #
 
 class Event < ActiveRecord::Base
+  has_and_belongs_to_many :recipients
   attr_accessible :date, :repeats, :title
 
   validates :title, :date, presence: true

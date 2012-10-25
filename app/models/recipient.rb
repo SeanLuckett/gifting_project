@@ -17,8 +17,9 @@
 class Recipient < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :personas
+  has_and_belongs_to_many :events
   attr_accessible :birthday, :image, :name, :fb_id, :spend_at_least,
-                  :spend_at_most, :persona_ids
+                  :spend_at_most, :persona_ids, :event_ids
 
   validates :name, presence: true
 

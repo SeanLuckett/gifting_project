@@ -11,15 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121025202811) do
+ActiveRecord::Schema.define(:version => 20121025214302) do
 
   create_table "events", :force => true do |t|
     t.string   "title",                         :null => false
     t.date     "date",                          :null => false
     t.boolean  "repeats",    :default => false
+    t.boolean  "custom",     :default => true
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
+
+  create_table "events_recipients", :id => false, :force => true do |t|
+    t.integer "event_id"
+    t.integer "recipient_id"
+  end
+
+  add_index "events_recipients", ["event_id", "recipient_id"], :name => "index_events_recipients_on_event_id_and_recipient_id"
+  add_index "events_recipients", ["recipient_id", "event_id"], :name => "index_events_recipients_on_recipient_id_and_event_id"
 
   create_table "personas", :force => true do |t|
     t.string   "title"

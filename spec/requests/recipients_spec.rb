@@ -30,7 +30,8 @@ describe "Recipients" do
     before :each do
       @personas = [FactoryGirl.create(:persona, :title => "Nerd"),
                    FactoryGirl.create(:persona, :title => "Giant")]
-      # @event = FactoryGirl.create(:event)
+      @events = [FactoryGirl.create(:event, :title => "Xmas"),
+                 FactoryGirl.create(:event, :title => "Valentine's")]
       visit user_recipients_path(user)
 
       click_link "New"
@@ -76,9 +77,17 @@ describe "Recipients" do
     context "when associating events" do
 
       it "associates an event" do
-        # check("#{@event.title}")
-        # click_button 'Done'
-        # user.recipients.first.events.count.should == 1
+        check("#{@events[0].title}")
+        click_button 'Done'
+        user.recipients.first.events.count.should == 1
+      end
+
+      it "associates several events" do
+        check("#{@events[0].title}")
+        check("#{@events[1].title}")
+        click_button 'Done'
+
+        user.recipients.first.events.count.should == 2
       end
     end
 
