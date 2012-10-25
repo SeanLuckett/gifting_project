@@ -15,4 +15,5 @@
 /tmp
 .DS_Store
 /config/heroku_env.rb
+/config/sendgrid.yml
 .jhw-cache/
