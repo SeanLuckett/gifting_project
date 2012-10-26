@@ -43,7 +43,7 @@
         = check_box_tag "recipient[persona_ids][]", persona.id, @recipient.personas.include?(persona)
 
     %p.field-description Do you have an event in mind for this person?  Select as many as you'd like, and I'll recommend gifts when the date is nigh. You will be able to add custom events, too.
-    - @events.each do |event|
+    - @user.events.each do |event|
       %label.checkbox
         #{event.title}
         = check_box_tag "recipient[event_ids][]", event.id, @recipient.events.include?(event)

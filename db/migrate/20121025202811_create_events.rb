@@ -3,9 +3,8 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.string :title, :null => false
       t.date :date, :null => false
-
-      t.boolean :repeats, :default => false
-      t.boolean :custom, :default => true
+      t.integer :user_id
+      t.boolean :repeats, :default => true
 
       t.timestamps
     end

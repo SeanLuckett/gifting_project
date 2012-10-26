@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :event do
     title "MyString"
     date "2012-10-25"
-    repeats false
+    repeats true
   end
 end

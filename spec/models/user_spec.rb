@@ -24,15 +24,14 @@ describe User do
       @user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
     end
 
-    # let(:user) { User.from_omniauth(OmniAuth.config.mock_auth[:facebook]) }
     context "when user is new" do
       it "sends a welcome email" do
         ActionMailer::Base.deliveries.last.to.should == [@user.email]
       end
     end
+
     context "when user is not new" do
-      it "won't send a duplicate emal" do
-        # user2 is same user, so shouldn't create a new one
+      it "won't send a duplicate email" do
         user2 = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
         expect{ User.from_omniauth(OmniAuth.config.mock_auth[:facebook]) }.
           not_to change{ ActionMailer::Base.deliveries.count }.
@@ -46,12 +45,18 @@ describe User do
       set_omniauth
       @user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
     end
+
     context "when saving new users" do
       it "saves a new user" do
         User.count.should == 1
       end
 
-    context "when saving an existing user"
+      it "gives user some standard events to work with" do
+        @user.events.count.should > 0
+      end
+    end
+
+    context "when saving an existing user" do
       it "doesn't save a duplicate" do
         expect{ User.from_omniauth(OmniAuth.config.mock_auth[:facebook]) }
           .not_to change{ User.count }.by(1)

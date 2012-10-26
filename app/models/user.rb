@@ -15,7 +15,10 @@
 
 class User < ActiveRecord::Base
   has_many :recipients
+  has_many :events
   attr_accessible :email
+
+  before_save :create_standard_events
   after_save :send_welcome_email
 
   def self.from_omniauth(auth)
@@ -34,5 +37,19 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     Welcomer.welcome_new_user(self).deliver
+  end
+
+  def create_standard_events
+    self.events.build(
+      title: "Christmas",
+      date:  Date.new(2012, 12, 25),
+      repeats: true
+      )
+
+    self.events.build(
+      title: "Valentine's Day",
+      date:  Date.new(2012, 2, 14),
+      repeats: true
+      )
   end
 end

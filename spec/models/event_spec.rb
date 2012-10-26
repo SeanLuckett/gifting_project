@@ -5,7 +5,8 @@
 #  id         :integer          not null, primary key
 #  title      :string(255)      not null
 #  date       :date             not null
-#  repeats    :boolean          default(FALSE)
+#  user_id    :integer
+#  repeats    :boolean          default(TRUE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

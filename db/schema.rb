@@ -14,12 +14,12 @@
 ActiveRecord::Schema.define(:version => 20121025214302) do
 
   create_table "events", :force => true do |t|
-    t.string   "title",                         :null => false
-    t.date     "date",                          :null => false
-    t.boolean  "repeats",    :default => false
-    t.boolean  "custom",     :default => true
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.string   "title",                        :null => false
+    t.date     "date",                         :null => false
+    t.integer  "user_id"
+    t.boolean  "repeats",    :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "events_recipients", :id => false, :force => true do |t|

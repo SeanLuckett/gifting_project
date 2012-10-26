@@ -30,11 +30,9 @@ describe "Recipients" do
     before :each do
       @personas = [FactoryGirl.create(:persona, :title => "Nerd"),
                    FactoryGirl.create(:persona, :title => "Giant")]
-      @events = [FactoryGirl.create(:event, :title => "Xmas"),
-                 FactoryGirl.create(:event, :title => "Valentine's")]
-      visit user_recipients_path(user)
+      @events = user.events
+      visit new_user_recipient_path(user)
 
-      click_link "New"
       fill_in "recipient[name]", :with => "Joseph P. Tester"
       select('October', :from => 'recipient[birthday(2i)]')
       select('16', :from => 'recipient[birthday(3i)]')
@@ -55,6 +53,10 @@ describe "Recipients" do
     it "notifies user of success" do
       click_button 'Done'
       page.should have_content "Recipient successfully created."
+    end
+
+    it "validates name field" do
+      pending "Need form validation for recipient name"
     end
 
     context "when associating personas" do

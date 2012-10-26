@@ -14,7 +14,6 @@ class RecipientsController < ApplicationController
   def new
     @user = current_user
     @personas = Persona.all
-    @events = Event.find_all_by_custom(:true)
     @recipient = @user.recipients.build
 
     respond_with @recipient

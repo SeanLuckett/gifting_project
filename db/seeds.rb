@@ -62,15 +62,15 @@ Persona.find_or_create_by_title(
   description: "Loves the environment and is a fan of eco-friendly products."
 )
 
-# EVENTS -- these are 
-Event.find_or_create_by_title(
-  title: "Christmas",
-  date: Date.new(2012, 12, 25),
-  repeats: true
-)
+# # EVENTS -- these are 
+# Event.find_or_create_by_title(
+#   title: "Christmas",
+#   date: Date.new(2012, 12, 25),
+#   repeats: true
+# )
 
-Event.find_or_create_by_title(
-  title: "Valentine's Day",
-  date: Date.new(2012, 2, 14),
-  repeats: true
-)
+# Event.find_or_create_by_title(
+#   title: "Valentine's Day",
+#   date: Date.new(2012, 2, 14),
+#   repeats: true
+# )
