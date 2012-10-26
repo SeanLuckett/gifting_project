@@ -10,8 +10,12 @@
 
 .row
   =form_for @recipient, :html => {:class => 'form-horizontal'}, :url => user_recipients_path(@user) do |rec|
-    - if @recipient.errors.any?
-      = bootstrap_flash
+    -if @recipient.errors.any?
+      #error_explanation
+        %h4= "#{pluralize(@recipient.errors.count, "error")} prohibited this recipient from being saved:"
+        %ul
+          - @recipient.errors.full_messages.each do |msg|
+            %li= msg
 
     #div.control-group
       %p.field-description What do you want to call this person?

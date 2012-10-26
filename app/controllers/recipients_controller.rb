@@ -1,6 +1,7 @@
 class RecipientsController < ApplicationController
   layout 'app_with_menu'
   respond_to :html
+  before_filter :get_personas
 
   def import_friends
     @user = current_user
@@ -20,16 +21,16 @@ class RecipientsController < ApplicationController
   end
 
   def create
-    user = User.find(params[:user_id])
+    @user = User.find(params[:user_id])
 
     if params[:fb_id].present?
-      create_from_facebook(user)
+      create_from_facebook(@user)
     else
-      @recipient = user.recipients.new(params[:recipient])
+      @recipient = @user.recipients.new(params[:recipient])
 
       respond_to do |format|
         if @recipient.save
-          format.html { redirect_to user_recipients_path(user), notice: "Recipient successfully created." }
+          format.html { redirect_to user_recipients_path(@user), notice: "Recipient successfully created." }
         else
           format.html { render action: "new"}
         end
@@ -52,6 +53,11 @@ class RecipientsController < ApplicationController
     flash[:notice] = "You removed #{@recipient.name} from the list."
     @recipient.destroy
     redirect_to user_recipients_path(params[:user_id])
+  end
+
+  private
+  def get_personas
+    @personas = Persona.all
   end
 
 end

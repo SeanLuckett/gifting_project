@@ -18,12 +18,12 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara', ">= 1.1.2"
   gem 'launchy', ">= 2.1.0"
-  gem 'debugger'
 end
 
 group :development, :test do
   gem 'jasmine-rails'
   gem 'pry'
+  gem 'debugger'
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9.1'
 end
