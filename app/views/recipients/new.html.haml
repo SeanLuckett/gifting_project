@@ -3,9 +3,6 @@
     =image_tag("http://www.placekitten.com/150/150")
   %ul.breadcrumb.rec-crumbs
     %li
-      = link_to "Dashboard", dashboard_index_path(@user)
-      %span.divider /
-    %li
       = link_to "Recipients", user_recipients_path(@user.id)
       %span.divider /
     %li.active New 

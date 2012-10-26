@@ -10,6 +10,7 @@ Giftola::Application.routes.draw do
 
   resources :users, :only => [:show, :edit, :update] do
     resources :recipients
+    resources :events
   end
 
   # Facebook recommends a "Channel file." This is one way to implement it in Rails

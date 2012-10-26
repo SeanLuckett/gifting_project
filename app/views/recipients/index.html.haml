@@ -3,18 +3,22 @@
     =image_tag("http://www.placekitten.com/150/150")
   %ul.breadcrumb.rec-crumbs
     %li
-      = link_to "Dashboard", dashboard_index_path(@user)
-      %span.divider /
+      / = link_to "Dashboard", dashboard_index_path(@user)
+      / %span.divider /
     %li.active Recipients 
 
 .row
-  .span3
+  %ul.nav.nav-tabs
+    %li.active
+      = link_to "Recipients", '#'
+    %li= link_to "Events", user_events_path(@user)
+  .span1
   .span4
     %h3 Select a recipient to edit
   .span3
 
 .row
-  .span2
+  .span1
   .span6
     #new-import-recipients.pull-right
       .btn= link_to "New", new_user_recipient_path(@user)
