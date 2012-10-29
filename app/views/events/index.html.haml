@@ -6,9 +6,9 @@
 
 .row
   %ul.nav.nav-tabs
-    %li= link_to "Recipients", user_recipients_path(current_user)
     %li.active
       = link_to "Events", '#'
+    %li= link_to "Recipients", user_recipients_path(current_user)
   .span1
   .span4
     %h3 Select an event to edit
@@ -17,16 +17,16 @@
 .row
   .span1
   .span6
-    #new-event.pull-right
-      .btn= link_to "New", new_user_event_path(current_user)
-
     - @events.each do |event|
       .event.well.well-large
         %span.delete-event.badge= link_to 'X', user_event_path(current_user, event), :confirm => "Do you want to remove #{event.title}?", :method => :delete
-        #event-title-date
-          %h3= event.title
+        .event-title-date
+          %h3.event-title= event.title
           %h4.event-date= event.date
-        #event-recipients
+        .event-recipients
           %p Associated Recipients:
           - event.recipients.each do |recipient|
             =image_tag recipient.image
+  .span1
+    #new-event.pull-right
+      .btn= link_to "New", new_user_event_path(current_user)

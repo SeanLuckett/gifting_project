@@ -6,9 +6,9 @@
 
 .row
   %ul.nav.nav-tabs
+    %li= link_to "Events", user_events_path(@user)
     %li.active
       = link_to "Recipients", '#'
-    %li= link_to "Events", user_events_path(@user)
   .span1
   .span4
     %h3 Select a recipient to edit
@@ -17,9 +17,6 @@
 .row
   .span1
   .span6
-    #new-import-recipients.pull-right
-      .btn= link_to "New", new_user_recipient_path(@user)
-
     - @recipients.each do |r|
       .recipient.well.well-large
         .rec-pic= image_tag(r.image)
@@ -27,4 +24,6 @@
           = r.name
           %span.delete-rec.badge= link_to 'X', user_recipient_path(@user, r), :confirm => "Do you want to remove #{r.name}?", :method => :delete
 
-  .span2
+  .span1    
+    #new-import-recipients.pull-right
+      .btn= link_to "New", new_user_recipient_path(@user)

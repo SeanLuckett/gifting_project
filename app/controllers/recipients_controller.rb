@@ -1,7 +1,7 @@
 class RecipientsController < ApplicationController
   layout 'app_with_menu'
   respond_to :html
-  before_filter :get_personas
+  before_filter :get_personas, :only => [:new, :create]
 
   def import_friends
     @user = current_user
@@ -49,10 +49,10 @@ class RecipientsController < ApplicationController
   end
 
   def destroy
-    @recipient = Recipient.find(params[:id])
-    flash[:notice] = "You removed #{@recipient.name} from the list."
-    @recipient.destroy
-    redirect_to user_recipients_path(params[:user_id])
+    recipient = Recipient.find(params[:id])
+    flash[:notice] = "You removed #{recipient.name} from the list."
+    recipient.destroy
+  redirect_to user_recipients_path(params[:user_id])
   end
 
   private

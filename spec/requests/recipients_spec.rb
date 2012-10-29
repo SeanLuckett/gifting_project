@@ -56,7 +56,9 @@ describe "Recipients" do
     end
 
     it "validates name field" do
-      pending "Need form validation for recipient name"
+      fill_in "recipient[name]", :with => ""
+      click_button 'Done'
+      page.should have_content "prohibited this recipient"
     end
 
     context "when associating personas" do
