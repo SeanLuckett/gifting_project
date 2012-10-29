@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   layout "app_with_menu"
   def index
-    @user = current_user
+    redirect_to user_events_path(current_user)
   end
 end
