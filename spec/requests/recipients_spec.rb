@@ -19,6 +19,13 @@ describe "Recipients" do
       it { should have_content "Janice" }
     end
 
+    context "when clicking a recipient" do
+      it "displays recipient's edit page" do
+        click_link "Phil"
+        page.should have_content "Edit Phil"
+      end
+    end
+
     context "when clicking delete" do
       it "destroys a recipient" do
         expect { click_link('X') }.to change(Recipient, :count).by(-1)
@@ -58,7 +65,7 @@ describe "Recipients" do
     it "validates name field" do
       fill_in "recipient[name]", :with => ""
       click_button 'Done'
-      page.should have_content "prohibited this recipient"
+      page.should have_content "Name can't be blank"
     end
 
     context "when associating personas" do
@@ -93,6 +100,27 @@ describe "Recipients" do
 
         user.recipients.first.events.count.should == 2
       end
+    end
+  end
+
+  describe "#edit" do
+    before :each do
+      @personas = [FactoryGirl.create(:persona, :title => "Nerd"),
+                   FactoryGirl.create(:persona, :title => "Giant")]
+      @events = user.events
+      @recipient = user.recipients.create(:name => "Jerry Joe Jameson",
+                                        :spend_at_least => 5,
+                                        :spend_at_most => 25,
+                                        :birthday => 21.years.ago)
+
+      visit edit_user_recipient_path(user, @recipient)
+    end
+
+    it "changes an attribute" do
+      spend_at_least_now = @recipient.spend_at_least
+      fill_in 'recipient[spend_at_least]', :with => '10'
+      click_button 'Done'
+      Recipient.first.spend_at_least.should == 10
     end
 
   end

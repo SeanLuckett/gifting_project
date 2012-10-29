@@ -1,0 +1,44 @@
+=form_for [@recipient.user, @recipient], :html => {:class => 'form-horizontal'} do |rec|
+  -if @recipient.errors.any?
+    #error_explanation
+      %h4= "#{pluralize(@recipient.errors.count, "error")} prohibited this recipient from being saved:"
+      %ul
+        - @recipient.errors.full_messages.each do |msg|
+          %li= msg
+
+  #div.control-group
+    %p.field-description What do you want to call this person?
+    = rec.label :name
+    = rec.text_field :name
+
+  #div.control-group
+    %p.field-description If you want to send birthday gifts, enter birthday:
+    = rec.label :birthday
+    = rec.date_select :birthday, {:start_year => Time.now.year - 90, :order => [:month, :day, :year], :include_blank => true}, {:class => 'input-medium'}
+
+  #div.control-group
+    %p.field-description How much would you like spend on gifts for this person?
+    = rec.label :spend_at_least
+    %div.input-prepend.input-append
+      %span.add-on $
+      = rec.text_field :spend_at_least, :class => 'input-mini'
+      %span.add-on .00
+    = rec.label :spend_at_most
+    %div.input-prepend.input-append
+      %span.add-on $
+      = rec.text_field :spend_at_most, :class => 'input-mini'
+      %span.add-on .00
+
+  %p.field-description Personas describe common interests for many of a type. Select one or more to describe this person. You can do this any time.
+  - @personas.each do |persona|
+    %label.checkbox
+      #{persona.title}
+      = check_box_tag "recipient[persona_ids][]", persona.id, @recipient.personas.include?(persona)
+
+  %p.field-description Do you have an event in mind for this person?  Select as many as you'd like, and I'll recommend gifts when the date is nigh. You will be able to add custom events, too.
+  - @recipient.user.events.each do |event|
+    %label.checkbox
+      #{event.title}
+      = check_box_tag "recipient[event_ids][]", event.id, @recipient.events.include?(event)
+
+  = rec.button "Done", :class => 'btn'

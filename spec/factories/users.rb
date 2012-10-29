@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :user do
     provider "MyString"
-    uid "MyString"
+    uid 1
     name "MyString"
     email "test@example.com"
     oauth_token "MyString"

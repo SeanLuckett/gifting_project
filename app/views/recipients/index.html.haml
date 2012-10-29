@@ -21,7 +21,7 @@
       .recipient.well.well-large
         .rec-pic= image_tag(r.image)
         %h4
-          = r.name
+          = link_to r.name, edit_user_recipient_path(@user, r)
           %span.delete-rec.badge= link_to 'X', user_recipient_path(@user, r), :confirm => "Do you want to remove #{r.name}?", :method => :delete
 
   .span1    

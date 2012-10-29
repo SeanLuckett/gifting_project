@@ -1,7 +1,7 @@
 class RecipientsController < ApplicationController
   layout 'app_with_menu'
   respond_to :html
-  before_filter :get_personas, :only => [:new, :create]
+  before_filter :get_personas
 
   def import_friends
     @user = current_user
@@ -14,15 +14,14 @@ class RecipientsController < ApplicationController
 
   def new
     @user = current_user
-    @personas = Persona.all
     @recipient = @user.recipients.build
 
     respond_with @recipient
   end
 
   def show
-    @user = User.find_by_id(params[:user_id])
-    @recipient = @user.recipients.find_by_id(params[:id])
+    user = User.find_by_id(params[:user_id])
+    @recipient = user.recipients.find_by_id(params[:id])
   end
 
   def create
@@ -50,6 +49,24 @@ class RecipientsController < ApplicationController
 
     respond_to do |format| 
       format.json { render :json => user.recipients }
+    end
+  end
+
+  def edit
+    user = User.find_by_id(params[:user_id])
+    @recipient = user.recipients.find_by_id(params[:id])
+  end
+
+  def update
+    user = User.find_by_id(params[:user_id])
+    @recipient = user.recipients.find_by_id(params[:id])
+
+    respond_to do |format|
+      if @recipient.update_attributes(params[:recipient])
+        format.html { redirect_to( user_recipients_path(@recipient.user), notice: "Recipient #{@recipient.name} successfully updated.") }
+      else
+        format.html { render action: 'edit'}
+      end
     end
   end
 

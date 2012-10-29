@@ -31,4 +31,21 @@ describe Recipient do
     before { subject.name = " "}
     it { should_not be_valid }
   end
+
+  describe "validating spending amounts" do
+    context "when validating spend at least" do
+      before { subject.spend_at_least = "dork" }
+      it { should_not be_valid }
+    end
+
+    context "when validating spend at most" do
+      before { subject.spend_at_most = "dork" }
+      it { should_not be_valid }
+    end
+
+    context "when spend_at_least is greater than spend_at_most" do
+      before { subject.spend_at_least = 20; subject.spend_at_most = 10}
+      it { should_not be_valid }
+    end
+  end
 end

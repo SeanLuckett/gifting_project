@@ -22,12 +22,23 @@ class Recipient < ActiveRecord::Base
                   :spend_at_most, :persona_ids, :event_ids
 
   validates :name, presence: true
+  validates :spend_at_least, :spend_at_most,
+              :numericality => { :only_integer => true }, :unless => "spend_at_least.blank?" 
+  validate :spend_at_least_is_less_than_spend_at_most
 
   # Right now, this is all kinds of kittens
   # Change at some point
   before_save do |recipient|
     if recipient.image.blank?
       recipient.image = "http://www.placekitten.com/50/50"
+    end
+  end
+
+  def spend_at_least_is_less_than_spend_at_most
+    unless spend_at_least.blank? || spend_at_most.blank?
+      if spend_at_least >= spend_at_most
+        errors.add(:spend_at_least, "can't be greater than, or the same as, spend at most.")
+      end
     end
   end
 end
