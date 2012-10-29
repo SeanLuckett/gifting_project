@@ -20,6 +20,11 @@ class RecipientsController < ApplicationController
     respond_with @recipient
   end
 
+  def show
+    @user = User.find_by_id(params[:user_id])
+    @recipient = @user.recipients.find_by_id(params[:id])
+  end
+
   def create
     @user = User.find(params[:user_id])
 
@@ -52,7 +57,7 @@ class RecipientsController < ApplicationController
     recipient = Recipient.find(params[:id])
     flash[:notice] = "You removed #{recipient.name} from the list."
     recipient.destroy
-  redirect_to user_recipients_path(params[:user_id])
+    redirect_to user_recipients_path(params[:user_id])
   end
 
   private

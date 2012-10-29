@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   respond_to :html
   
   def index
-    @user = current_user
+    @user = User.find_by_id(params[:user_id])
     @events = @user.events.all
   end
 

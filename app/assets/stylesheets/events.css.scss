@@ -8,7 +8,18 @@
 
 .delete-event {
   float: right;
+  margin-top: -10px;
+  margin-right: -15px;
 }
 
-.event-title .event-date {
+.event-date {
+  float: right;
+  font-size: .8em;
+  padding-right: 30px;
+}
+
+.recipient-heading {
+  float: left;
+  margin-right: 30px;
+  font-weight: bold;
 }
