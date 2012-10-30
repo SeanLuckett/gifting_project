@@ -48,4 +48,8 @@ describe Recipient do
       it { should_not be_valid }
     end
   end
+
+  describe "Can extract first name" do
+    its(:first_name) { should == "MyString" }
+  end
 end

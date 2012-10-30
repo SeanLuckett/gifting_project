@@ -35,8 +35,8 @@ describe "Recipients" do
 
   describe "#new" do
     before :each do
-      @personas = [FactoryGirl.create(:persona, :title => "Nerd"),
-                   FactoryGirl.create(:persona, :title => "Giant")]
+      @personas = [create(:persona, :title => "Nerd"),
+                   create(:persona, :title => "Giant")]
       @events = user.events
       visit new_user_recipient_path(user)
 
@@ -105,8 +105,8 @@ describe "Recipients" do
 
   describe "#edit" do
     before :each do
-      @personas = [FactoryGirl.create(:persona, :title => "Nerd"),
-                   FactoryGirl.create(:persona, :title => "Giant")]
+      @personas = [create(:persona, :title => "Nerd"),
+                   create(:persona, :title => "Giant")]
       @events = user.events
       @recipient = user.recipients.create(:name => "Jerry Joe Jameson",
                                         :spend_at_least => 5,

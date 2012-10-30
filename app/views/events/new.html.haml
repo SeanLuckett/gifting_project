@@ -1,0 +1,12 @@
+.row
+  #logo.pull-left
+    =image_tag("http://www.placekitten.com/150/150")
+  %ul.breadcrumb.-crumbs
+    %li
+      = link_to "Events", user_events_path(@user.id)
+      %span.divider /
+    %li.active New 
+  %h3 Let's create a new event.
+
+.row
+  = render 'form'

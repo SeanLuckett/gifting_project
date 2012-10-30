@@ -26,6 +26,10 @@ class Recipient < ActiveRecord::Base
               :numericality => { :only_integer => true }, :unless => "spend_at_least.blank?" 
   validate :spend_at_least_is_less_than_spend_at_most
 
+  def first_name
+    self.name.split(" ").first
+  end
+
   # Right now, this is all kinds of kittens
   # Change at some point
   before_save do |recipient|
