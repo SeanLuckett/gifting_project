@@ -43,8 +43,37 @@ describe "Events" do
     end
 
     it "creates a new event" do
+      expect { click_button 'Done' }.to change(Event, :count).by(1)
+    end
+
+    it "shows the created event" do
       click_button 'Done'
       page.should have_content "#{@recipient.first_name}'s Birthday"
+    end
+
+    it "notifies user of success" do
+      click_button 'Done'
+      page.should have_content "Event created."
+    end
+
+    context "when validating name field" do
+      before do
+        fill_in "event[title]", :with => ""
+        click_button 'Done'
+      end
+
+      it { should have_content "Title can't be blank" }
+    end
+
+    context "when associating recipients" do
+      before do
+        check("#{@recipient.name}")
+        click_button 'Done'
+      end
+      it "associates a recipient" do
+        new_event = Event.find_by_title("#{@recipient.first_name}'s Birthday")
+        new_event.recipients.count.should == 1
+      end
     end
 
   end

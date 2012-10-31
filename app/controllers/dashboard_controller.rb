@@ -3,7 +3,8 @@ class DashboardController < ApplicationController
   def index
     if params[:import]
       redirect_to user_events_path(current_user), notice: "Imported #{current_user.recipients.count} Facebook friends."
+    else
+      redirect_to user_events_path(current_user)
     end
-    redirect_to user_events_path(current_user)
   end
 end

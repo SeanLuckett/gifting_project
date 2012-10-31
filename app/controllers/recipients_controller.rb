@@ -1,40 +1,37 @@
 class RecipientsController < ApplicationController
   layout 'app_with_menu'
   respond_to :html
-  before_filter :get_personas
+  before_filter :get_personas, :except => [:create_from_facebook, :import_friends]
+  before_filter :get_user
 
   def import_friends
-    @user = current_user
   end
 
   def index
-    @user = current_user
     @recipients = @user.recipients.all
   end
 
   def new
-    @user = current_user
     @recipient = @user.recipients.build
 
     respond_with @recipient
   end
 
   def show
-    user = User.find_by_id(params[:user_id])
-    @recipient = user.recipients.find_by_id(params[:id])
+    @recipient = @user.recipients.find_by_id(params[:id])
   end
 
   def create
-    @user = User.find(params[:user_id])
-
     if params[:fb_id].present?
+      #before filter doesn't work with fb content as implemented with Backbone.js
+      @user = User.find_by_id(params[:user_id])
       create_from_facebook(@user)
     else
       @recipient = @user.recipients.new(params[:recipient])
 
       respond_to do |format|
         if @recipient.save
-          format.html { redirect_to user_recipients_path(@user), notice: "Recipient successfully created." }
+          format.html { redirect_to user_recipients_path(@user), notice: "Recipient created." }
         else
           format.html { render action: "new"}
         end
@@ -53,17 +50,15 @@ class RecipientsController < ApplicationController
   end
 
   def edit
-    user = User.find_by_id(params[:user_id])
-    @recipient = user.recipients.find_by_id(params[:id])
+    @recipient = @user.recipients.find_by_id(params[:id])
   end
 
   def update
-    user = User.find_by_id(params[:user_id])
-    @recipient = user.recipients.find_by_id(params[:id])
+    @recipient = @user.recipients.find_by_id(params[:id])
 
     respond_to do |format|
       if @recipient.update_attributes(params[:recipient])
-        format.html { redirect_to( user_recipients_path(@recipient.user), notice: "Recipient #{@recipient.name} successfully updated.") }
+        format.html { redirect_to( user_recipients_path(@recipient.user), notice: "Recipient #{@recipient.name} updated.") }
       else
         format.html { render action: 'edit'}
       end
@@ -80,6 +75,10 @@ class RecipientsController < ApplicationController
   private
   def get_personas
     @personas = Persona.all
+  end
+
+  def get_user
+    @user = current_user
   end
 
 end

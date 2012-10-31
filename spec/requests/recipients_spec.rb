@@ -59,7 +59,7 @@ describe "Recipients" do
 
     it "notifies user of success" do
       click_button 'Done'
-      page.should have_content "Recipient successfully created."
+      page.should have_content "Recipient created."
     end
 
     it "validates name field" do
