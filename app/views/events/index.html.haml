@@ -22,7 +22,7 @@
         %span.delete-event.badge= link_to 'X', user_event_path(current_user, event), :confirm => "Do you want to remove #{event.title}?", :method => :delete
         .event-title-date
           %h3.event-title
-            = event.title
+            = link_to event.title, edit_user_event_path(current_user, event)
             %span.event-date= event.date
         .event-recipients
           %p.recipient-heading Associated Recipients:

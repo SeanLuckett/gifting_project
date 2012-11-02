@@ -117,10 +117,9 @@ describe "Recipients" do
     end
 
     it "changes an attribute" do
-      spend_at_least_now = @recipient.spend_at_least
       fill_in 'recipient[spend_at_least]', :with => '10'
       click_button 'Done'
-      Recipient.first.spend_at_least.should == 10
+      @recipient.reload.spend_at_least.should == 10
     end
 
   end

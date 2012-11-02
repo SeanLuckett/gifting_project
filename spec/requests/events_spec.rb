@@ -39,7 +39,7 @@ describe "Events" do
       select('June', :from => 'event[date(2i)]')
       select('16', :from => 'event[date(3i)]')
       select(Time.now.year.next.to_s, :from => 'event[date(1i)]')
-      choose('repeats_yes')
+      choose('event_repeats_true')
     end
 
     it "creates a new event" do
@@ -75,6 +75,18 @@ describe "Events" do
         new_event.recipients.count.should == 1
       end
     end
+  end
 
+  describe "#edit" do
+    before :each do
+      @event = user.events.create(:title => "Birthday", :date => Time.now + 1.year, :repeats => true)
+      visit edit_user_event_path(user, @event)
+    end
+
+    it "changes an attribute" do
+      choose("event_repeats_false")
+      click_button 'Done'
+      @event.reload.repeats.should be_false
+    end
   end
 end

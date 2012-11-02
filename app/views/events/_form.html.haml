@@ -19,10 +19,10 @@
   %p.field-description Is this a recurring event?
   %label.radio
     Yes
-    = radio_button_tag(:repeats, "yes")
+    = event.radio_button(:repeats, true)
   %label.radio
     No
-    = radio_button_tag(:repeats, "no")
+    = event.radio_button(:repeats, false)
 
   %p.field-description Do you have a person, or several in mind for this person?  Select as many as you'd like, and I'll recommend gifts when the date is nigh. 
   - @event.user.recipients.each do |recipient|

@@ -25,6 +25,22 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    @event = @user.events.find_by_id(params[:id])
+  end
+
+  def update
+    @event = @user.events.find_by_id(params[:id])
+
+    respond_to do |format|
+      if @event.update_attributes(params[:event])
+        format.html { redirect_to( user_events_path(@event.user), notice: "Event #{@event.title} updated.") }
+      else
+        format.html { render action: 'edit' }
+      end
+    end
+  end
+
   def destroy
     event = Event.find_by_id(params[:id])
     flash[:notice] = "You removed #{event.title} from the list."
