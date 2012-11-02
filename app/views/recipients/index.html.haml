@@ -10,20 +10,34 @@
     %li.active
       = link_to "Recipients", '#'
   .span1
-  .span4
+  .span5
     %h3 Select a recipient to edit
   .span3
+    #new-import-recipients.pull-right
+      .btn= link_to "New", new_user_recipient_path(@user)
 
 .row
   .span1
-  .span6
+  .span7
     - @recipients.each do |r|
       .recipient.well.well-large
         .rec-pic= image_tag(r.image)
-        %h4
+        %span.delete-rec.badge= link_to 'X', user_recipient_path(@user, r), :confirm => "Do you want to remove #{r.name}?", :method => :delete
+        %h4.rec-name
           = link_to r.name, edit_user_recipient_path(@user, r)
-          %span.delete-rec.badge= link_to 'X', user_recipient_path(@user, r), :confirm => "Do you want to remove #{r.name}?", :method => :delete
+        
+        .rec-min-max
+          %h5= "Spend at least: $#{r.spend_at_least || 0}"
+          %h5= "Spend at most: $#{r.spend_at_most || 0}"
 
-  .span1    
-    #new-import-recipients.pull-right
-      .btn= link_to "New", new_user_recipient_path(@user)
+        .rec-birthday
+          %h5
+            Birthday:
+            = display_recipient_birthday(r)
+
+        .rec-associated-events
+          %h5.event-heading 
+            Associated Events: 
+            - r.events.count.times do |i|
+              =link_to "#{r.events[i].title}", edit_user_event_path(@user, r.events[i])
+  .span1
