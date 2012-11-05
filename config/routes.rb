@@ -7,6 +7,7 @@ Giftola::Application.routes.draw do
 
   match 'auth/facebook/callback', :to => 'sessions#create'
   match 'auth/failure', :to => redirect('/')
+  match 'auth/facebook/logout' => 'sessions#destroy', :as => 'facebook_logout'
 
   resources :users, :only => [:show, :edit, :update] do
     resources :recipients

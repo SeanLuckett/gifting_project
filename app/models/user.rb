@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
 
     where(auth.slice(:uid)).new.tap do |user|
       user.name = auth.info.name
+      user.provider = auth.provider
       user.image = auth.info.image
       user.email = auth.info.email
       user.oauth_token = auth.credentials.token
