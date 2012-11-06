@@ -1,11 +1,11 @@
 class DashboardController < ApplicationController
   layout "app_with_menu"
-  
+
   def index
+    # is this a new user who's just imported FB friends?
     if params[:import]
-      redirect_to user_events_path(current_user), notice: "Imported #{current_user.recipients.count} Facebook friends."
-    else
-      redirect_to user_events_path(current_user)
+      flash[:notice] = "Imported #{current_user.recipients.count} Facebook friends."
     end
+    redirect_to user_events_path(current_user)
   end
 end

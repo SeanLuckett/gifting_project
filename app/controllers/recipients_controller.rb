@@ -1,6 +1,7 @@
 class RecipientsController < ApplicationController
   layout 'app_with_menu'
   respond_to :html
+  skip_before_filter :require_login, :only => [:create, :create_from_facebook]
   before_filter :get_personas, :except => [:create_from_facebook, :import_friends]
   before_filter :get_user
 
@@ -23,7 +24,8 @@ class RecipientsController < ApplicationController
 
   def create
     if params[:fb_id].present?
-      #before filter doesn't work with fb content as implemented with Backbone.js
+      # before filter for getting user doesn't work with fb content 
+      # as implemented with Backbone.js
       @user = User.find_by_id(params[:user_id])
       create_from_facebook(@user)
     else
