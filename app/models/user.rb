@@ -15,7 +15,7 @@
 
 class User < ActiveRecord::Base
   has_many :recipients
-  has_many :events
+  has_many :events, :order => 'date DESC'
   attr_accessible :email
 
   before_save :create_standard_events
