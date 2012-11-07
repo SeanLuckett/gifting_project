@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   layout 'app_with_menu'
   respond_to :html
   before_filter :get_user
+  before_filter :update_events, :only => [:index]
   
   def index
     @events = @user.events.all
@@ -51,5 +52,14 @@ class EventsController < ApplicationController
   private
   def get_user
     @user = current_user
+  end
+
+  def update_events
+    current_user.events.each do |event|
+      if Date.today > event.date
+        new_date = event.date.change(:year => Time.now.year + 1)
+        event.update_attributes(:date => new_date)
+      end
+    end
   end
 end
