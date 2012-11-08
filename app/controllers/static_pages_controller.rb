@@ -18,4 +18,16 @@ class StaticPagesController < ApplicationController
 
     go_to_import_or_dashboard(user)
   end
+
+  def save_and_confirm_email
+    current_user = User.find_by_oauth_token(params[:auth_token])
+    session[:user_id] = current_user.id
+
+    if params[:confirm_email]
+      current_user.email_confirmed = true
+      current_user.save!
+      flash[:success] = "Email address confirmed."
+      go_to_import_or_dashboard(current_user)
+    end
+  end
 end
