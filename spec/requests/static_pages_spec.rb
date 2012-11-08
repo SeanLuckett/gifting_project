@@ -37,7 +37,7 @@ describe "StaticPages" do
     it "routes to /recipients/import_friends" do
       click_button 'Confirm'
       current_path.should == import_friends_path
-      page.should have_content "Email saved."
+      page.should have_content "Email address saved."
     end
   end
 end

@@ -23,11 +23,9 @@ class UsersController < ApplicationController
 
   private
   def save_and_confirm_email(user)
-    if user.update_attributes(params[:user])
-      flash[:success] = "Email address confirmed."
-      user.update_attributes(:email_confirmed => true)
-      go_to_import_or_dashboard(user)
-    end
+    flash[:success] = "Email address confirmed."
+    user.update_attributes(:email_confirmed => true)
+    go_to_import_or_dashboard(user)
   end
 
 end
