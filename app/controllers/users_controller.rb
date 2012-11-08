@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
+    save_and_confirm_email(@user) if params[:confirm_email]
 
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated"
@@ -19,5 +20,13 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-  
+
+  private
+  def save_and_confirm_email(user)
+    if user.update_attributes(params[:user])
+      flash[:success] = "Email address confirmed."
+      go_to_import_or_dashboard(user)
+    end
+  end
+
 end

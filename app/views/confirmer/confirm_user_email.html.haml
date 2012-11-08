@@ -3,8 +3,12 @@
   %body
     %h2
       =image_tag("http://www.placekitten.com/150/150")
-      ="Welcome to Giftola, #{@name}."
+    %p Hello,
+    %p
+      Please
+      = link_to 'confirm your email address', edit_user_url(@user, :confirm_email => true)
+      for Giftola.
 
     %p
-      Here there be copy regarding next steps and promoting
-      all that is awesome about Giftola.
+      If the link above doesn't display, click the link below or copy/paste it into your browser's address bar to set up your account.
+      = edit_user_url(@user, :confirm_email => true)

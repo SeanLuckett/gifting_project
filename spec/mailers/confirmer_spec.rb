@@ -7,7 +7,7 @@ describe Confirmer do
     let(:mail) { Confirmer.confirm_user_email(user) }
 
     it "renders the subject" do
-      mail.subject.should == "Welcome to Giftola"
+      mail.subject.should == "Giftola: confirm your email address"
     end
 
     it "renders the receiver email" do
@@ -19,7 +19,7 @@ describe Confirmer do
     end
 
     it "assigns @name" do
-      mail.body.encoded.should match("Matty")
+      mail.body.encoded.should match("email address")
     end
   end
 end
