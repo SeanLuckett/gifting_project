@@ -1,14 +1,16 @@
 class SessionsController < ApplicationController
   skip_before_filter :require_login
+
   def create
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
-    if user.recipients.blank?
-      redirect_to import_friends_path
+    unless user.email_confirmed?
+      redirect_to static_pages_confirm_email_path
     else
-      redirect_to dashboard_index_path
+      go_to_import_or_dashboard(user)
     end
   end
+
 
   def destroy
     session.delete(:user_id)

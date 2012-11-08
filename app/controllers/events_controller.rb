@@ -56,7 +56,7 @@ class EventsController < ApplicationController
 
   def update_events
     current_user.events.each do |event|
-      if Date.today > event.date
+      if event.repeats? && Date.today > event.date
         new_date = event.date.change(:year => Time.now.year + 1)
         event.update_attributes(:date => new_date)
       end

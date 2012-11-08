@@ -12,6 +12,7 @@
 #  updated_at       :datetime         not null
 #  email            :string(255)
 #  image            :string(255)
+#  email_confirmed  :boolean          default(FALSE)
 #
 
 require 'spec_helper'
@@ -22,12 +23,6 @@ describe User do
       ActionMailer::Base.deliveries.clear
       set_omniauth
       @user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
-    end
-
-    context "when user is new" do
-      it "sends a welcome email" do
-        ActionMailer::Base.deliveries.last.to.should == [@user.email]
-      end
     end
 
     context "when user is not new" do

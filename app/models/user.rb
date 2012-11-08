@@ -1,3 +1,4 @@
+# == Schema Information
 #
 # Table name: users
 #
@@ -11,15 +12,13 @@
 #  updated_at       :datetime         not null
 #  email            :string(255)
 #  image            :string(255)
+#  email_confirmed  :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
   has_many :recipients
   has_many :events, :order => 'date ASC'
   attr_accessible :email
-
-  before_save :create_standard_events
-  after_save :send_welcome_email
 
   def self.from_omniauth(auth)
     user = self.find_by_uid(auth[:uid])
@@ -33,21 +32,23 @@ class User < ActiveRecord::Base
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
+      
+      user.create_standard_events if user.save
     end
   end
 
-  def send_welcome_email
-    Welcomer.welcome_new_user(self).deliver
+  def send_confirmation_email
+    Confirmer.confirm_user_email(self).deliver
   end
 
   def create_standard_events
-    self.events.build(
+    self.events.create(
       title: "Christmas",
       date:  Date.new(2012, 12, 25),
       repeats: true
       )
 
-    self.events.build(
+    self.events.create(
       title: "Valentine's Day",
       date:  Date.new(2012, 2, 14),
       repeats: true
