@@ -34,10 +34,23 @@ describe "StaticPages" do
       it { field_value.should be_empty }
     end
 
-    it "routes to /recipients/import_friends" do
-      click_button 'Confirm'
-      current_path.should == import_friends_path
-      page.should have_content "Email address saved."
+    context "when routing to next step" do
+      context "when user hasn't imported facebook friends" do
+        it "routes to /recipients/import_friends" do
+          click_button 'Confirm'
+          current_path.should == import_friends_path
+          page.should have_content "Email address saved."
+        end
+      end
+
+      context "when user has imported facebook friends" do
+        before { user.recipients.create(:name => "Harry") }
+
+        it "routes to users dashboard" do
+          click_button 'Confirm'
+          current_path.should == user_events_path(user)
+        end
+      end
     end
   end
 end

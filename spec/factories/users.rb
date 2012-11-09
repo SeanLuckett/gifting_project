@@ -6,6 +6,7 @@ FactoryGirl.define do
     uid 1
     name "MyString"
     email "test@example.com"
+    email_confirmed false
     oauth_token "MyString"
     oauth_expires_at "2012-09-07 13:32:23"
   end
