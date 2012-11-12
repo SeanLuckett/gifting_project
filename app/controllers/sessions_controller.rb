@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
     unless user.email_confirmed?
-      redirect_to static_pages_confirm_email_path
+      redirect_to confirm_email_confirm_address_path
     else
       go_to_import_or_dashboard(user)
     end

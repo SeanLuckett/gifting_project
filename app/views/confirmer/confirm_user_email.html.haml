@@ -6,9 +6,9 @@
     %p Hello,
     %p
       Please
-      = link_to 'confirm your email address', static_pages_save_and_confirm_email_url(:confirm_email => true, :auth_token => @user.oauth_token)
+      = link_to 'confirm your email address', confirm_email_save_address_record_confirmed_url(:confirm_email => true, :auth_token => @user.oauth_token)
       for Giftola.
 
     %p
       If the link above doesn't display, click the link below or copy/paste it into your browser's address bar to set up your account.
-    = static_pages_save_and_confirm_email_url(:confirm_email => true, :auth_token => @user.oauth_token)
+    = confirm_email_save_address_record_confirmed_url(:confirm_email => true, :auth_token => @user.oauth_token)

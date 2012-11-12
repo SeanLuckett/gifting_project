@@ -1,8 +1,8 @@
 Giftola::Application.routes.draw do
   get "dashboard/index"
-  get "static_pages/confirm_email"
-  put "static_pages/send_and_confirm"
-  get "static_pages/save_and_confirm_email"
+  get "confirm_email/confirm_address"
+  put "confirm_email/send_email_to_address"
+  get "confirm_email/save_address_record_confirmed"
 
   get "recipients/import_friends", :as => '/import_friends'
 
