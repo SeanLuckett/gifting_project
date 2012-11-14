@@ -18,7 +18,8 @@ describe "Events" do
 
     context "when clicking an event" do
       it "displays the event's edit page" do
-        pending "Implement during event edit feature"
+        click_link "Christmas"
+        page.should have_content "Edit Christmas"
       end
     end
 

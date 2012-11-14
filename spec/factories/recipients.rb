@@ -11,4 +11,13 @@ FactoryGirl.define do
     birthday { 21.years.ago }
     user
   end
+
+  factory :recipient_with_persona do
+    id 1
+    fb_id 42
+    name "MyString McMystring"
+    spend_at_least 5
+    spend_at_most 25
+    personas {[FactoryGirl.create(:persona)]}
+  end
 end

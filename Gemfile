@@ -11,6 +11,7 @@ gem 'haml-rails', group: :development
 gem 'annotate', group: :development
 gem 'omniauth-facebook'
 gem 'requirejs-rails'
+gem 'vacuum'
 
 group :test do
   gem 'database_cleaner', "~> 0.7.2"
