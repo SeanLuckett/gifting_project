@@ -3,74 +3,70 @@ require 'spec_helper'
 #NOTE: Gateway should use Vacuum gem to wrap Amazon API requests.
 # This is blocked until Associate/Affiliate ID/TAG is resolved/provided.
 describe RecommendationEngine::Gateway do
-  before do
-    persona = create(:persona, :title => "Nerd")
-    @recipient = create(:recipient, :personas => [persona])
-  end
-  subject { RecommendationEngine::Gateway.new(@recipient) }
+  describe "Manipulating a recommendation" do
+    context "when recipient has at least one associated persona" do
+      before do
+        persona = create(:persona, :title => "Nerd")
+        @recipient = create(:recipient, :personas => [persona])
+        RecommendationEngine::Recommendation.any_instance.stub(:recommendation).and_return( {:key => "value"} )
+      end
 
-  describe "Getting the recommendation" do
-  end
+      subject { RecommendationEngine::Gateway.new(@recipient) }
 
-  describe "building the amazon api request" do
+      its(:recommend) { should be_kind_of(Hash) }
 
-    # will eventually move to its own file
-    # describe "RecommendationEngine::ApiRequest" do
-    #   before { stub_const("RecommendationEngine::ApiRequest::BASE_REQUEST_URL", "") }
+      it "returns recommendation in json" do
+        subject.recommend_to_json.should == "{\"key\":\"value\"}"
+      end
+    end
 
-    #   context "when given single parameter name and value" do
-    #     let(:request) { {:parameter_name => "this and that"} }    
+    context "when recipient has no personas" do
+      let(:recipient) { create(:recipient) }
+      subject { RecommendationEngine::Gateway.new(recipient) }
 
-    #     it "url-encodes spaces with '%20'" do
-    #       subject.build_request(request).should =~ /this%20and%20that/
-    #     end
-
-    #     it "creates api parameter names from symbols" do
-    #       subject.build_request(request).should =~ /ParameterName/
-    #     end
-
-    #     it "builds name/value pairs from hash" do
-    #       expected_request = "ParameterName=this%20and%20that"
-    #       subject.build_request(request).should == expected_request
-    #     end
-
-    #     context "when value is a number" do
-    #       let(:request) { { :param => 2 } }
-
-    #       it "builds valid request" do
-    #         expected_request = "Param=2"
-    #         subject.build_request(request).should == expected_request
-    #       end
-    #     end
-    #   end
-
-    #   context "when given more than one parameter name and value" do
-    #     let(:request) { { :param_name_this => "this", :param_name_that => "that"} }
-
-    #     it "returns a proper api string" do
-    #       expected_request = "ParamNameThis=this&ParamNameThat=that"
-    #       subject.build_request(request).should == expected_request
-    #     end
-    #   end
-
-    #   context "when given compound parameters" do
-    #     let(:request) { { :item_1 => "excellent" } }
-
-    #     it "transforms params into copound params" do
-    #       expected_request = "Item.1=excellent"
-    #       subject.build_request(request).should == expected_request
-    #     end
-    #   end
-    # end
-
-    # it "creates official, full Amazon api request" do
-    #   expected_request = "http://aws.amazonaws.com/onca/xml?Service=AWSECommerceService&AWSAccessKeyId=#{AMAZON['ACCESS_KEY']}&ParamName=this"
-    #   subject.build_request(:param_name => 'this').should == expected_request
-    # end
+      it "raises an error" do
+        lambda { subject.recommend }.should raise_error(RecommendationEngine::NoPersonasError)
+      end
+    end
   end
 
-  describe "returning a recommendation" do
-    pending "working on amazon request first"
+  describe "Remote shopping cart" do
+    pending "Must have amazon api keys to start working with this"
   end
+end
 
+describe RecommendationEngine::Recommendation do
+  describe "#recommendation" do
+    before do
+      RecommendationEngine::ApiRequest
+        .any_instance.stub(:results)
+        .and_return( {:key => "value"})
+
+      persona = create(:persona, :title => "Nerd")
+      @recipient = create(:recipient, :personas => [persona])
+    end
+    subject { RecommendationEngine::Recommendation.new(@recipient) }
+
+    its(:recommendation) { should be_kind_of(Hash) }
+
+    describe "the returned hash includes" do
+      let(:recommendation) { subject.recommendation }
+
+      it "recipient name" do
+        recommendation.has_value?(@recipient.name).should be_true
+      end
+
+      it "titles of associated personas" do
+        recommendation[:personas].should include @recipient.personas.first.title
+      end
+
+      it "the top recommended item" do
+        recommendation.include?(:top_recommended).should be_true
+      end
+
+      it "alternative recommendations" do
+        recommendation.include?(:alternative_recommended).should be_true
+      end
+    end
+  end
 end

@@ -1,55 +1,59 @@
 module RecommendationEngine
   class Gateway
-
     def initialize(recipient)
       @recipient = recipient
+      @recommendation = Recommendation.new(@recipient)
     end
 
-    def build_request(request)
-      ApiRequest.new(request).build_request
+    def recommend
+      raise NoPersonasError if @recipient.personas.count == 0
+      @recommendation.recommendation
     end
 
+    def recommend_to_json
+      @recommendation.recommendation.to_json
+    end
   end
 
   # Put in own file
   class Recommendation
+    def initialize(recipient)
+      @recipient = recipient
+      @request = ApiRequest.new(get_personas)
+    end
+
+    def recommendation
+      {
+        :name => @recipient.name,
+        :personas => get_personas,
+        :top_recommended => top_recommended, 
+        :alternative_recommended => alternative_recommended
+      }
+    end
+
+    private
+    def get_personas
+      @recipient.personas.map(&:title)
+    end
+
+    def top_recommended
+      ""
+    end
+
+    def alternative_recommended
+      ["gift1", "gift2"]
+    end
+
   end
 
-  # class ApiRequest
-  #   BASE_REQUEST_URL = "http://aws.amazonaws.com/onca/xml?Service=AWSECommerceService&AWSAccessKeyId=#{AMAZON['ACCESS_KEY']}&" 
+  class ApiRequest
+    def initialize(personas)
+      @personas = personas
+    end
+  end
 
-  #   def initialize(request)
-  #     @request = request
-  #   end
+  class Gift
+  end
 
-  #   def build_request
-  #     set_request = BASE_REQUEST_URL + set_parameter_values
-  #   end
-
-  #   private
-  #   def set_parameter_values
-  #     prepared_request = []
-  #     @request.each do |param, value|
-  #       par = to_amazon_parameter(param)
-  #       val = encode_spaces(value)
-  #       prepared_request << par + "=" + val
-  #     end
-  #     @request = prepared_request.join('&')
-  #   end
-
-  #   def to_amazon_parameter(parameter)
-  #     parts = parameter.to_s.split("_")
-  #     parts.each do |part|
-  #       part.capitalize!
-  #       unless part.to_i == 0
-  #         part.insert(0, ".")
-  #       end
-  #     end
-  #     parts.join
-  #   end 
-
-  #   def encode_spaces(request)
-  #     request.to_s.gsub(/ /, "%20")
-  #   end
-  # end
+  class NoPersonasError < StandardError; end
 end
