@@ -31,6 +31,16 @@ describe "Recipients" do
         expect { click_link('X') }.to change(Recipient, :count).by(-1)
       end
     end
+
+    context "when clicking import from facebook" do
+      before :each do
+        click_link 'Import from Facebook'
+      end
+
+      it "routes to recipients/inport_friends" do
+        current_path.should == import_friends_path
+      end
+    end
   end
 
   describe "#new" do

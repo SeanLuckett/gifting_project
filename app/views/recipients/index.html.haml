@@ -10,15 +10,16 @@
     %li.active
       = link_to "Recipients", '#'
   .span1
-  .span5
+  .span4
     %h3 Select a recipient to edit
-  .span3
+  .span4
     #new-import-recipients.pull-right
       .btn= link_to "New", new_user_recipient_path(@user)
+      .btn= link_to "Import from Facebook", import_friends_path
 
 .row
   .span1
-  .span7
+  .span8
     - @recipients.each do |r|
       .recipient.well.well-large
         .rec-pic= image_tag(r.image)
@@ -40,4 +41,3 @@
             Associated Events: 
             - r.events.count.times do |i|
               =link_to "#{r.events[i].title}", edit_user_event_path(@user, r.events[i])
-  .span1

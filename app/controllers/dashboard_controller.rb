@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
   def index
     # is this a new user who's just imported FB friends?
     if params[:import]
-      flash[:notice] = "Imported #{current_user.recipients.count} Facebook friends."
+      flash[:notice] = "Imported #{params[:numFriends]} Facebook friends."
     end
 
     # so long as this redirects somewhere else, flash messages can get lost
@@ -12,7 +12,11 @@ class DashboardController < ApplicationController
     if flash[:success]
       flash[:success] = flash[:success]
     end
-    
-    redirect_to user_events_path(current_user)
+
+    if session[:return_to]
+      redirect_to session[:return_to] 
+    else
+      redirect_to user_events_path(current_user)
+    end
   end
 end

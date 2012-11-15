@@ -6,6 +6,11 @@ class RecipientsController < ApplicationController
   before_filter :get_user
 
   def import_friends
+    if request.referer == user_recipients_url(@user)
+      session[:return_to] = request.referer
+    else
+      session[:return_to] = nil
+    end
   end
 
   def index

@@ -1,12 +1,14 @@
-module RecommendationEngine
+module GiftRecommendation
   class Gateway
+    NoPersonas = Class.new(StandardError)
+    
     def initialize(recipient)
       @recipient = recipient
       @recommendation = Recommendation.new(@recipient)
     end
 
     def recommend
-      raise NoPersonasError if @recipient.personas.count == 0
+      raise NoPersonas if @recipient.personas.count == 0
       @recommendation.recommendation
     end
 
@@ -54,6 +56,4 @@ module RecommendationEngine
 
   class Gift
   end
-
-  class NoPersonasError < StandardError; end
 end
