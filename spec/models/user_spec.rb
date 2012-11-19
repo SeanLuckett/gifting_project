@@ -57,5 +57,16 @@ describe User do
           .not_to change{ User.count }.by(1)
       end
     end
+
+    context "when deleting a user" do
+      before do
+        create(:recipient, :user_id => @user.id)
+        create(:recipient, :id => 20, :user_id => @user.id)
+      end
+
+      it "destroys all, associated recpients" do
+        expect{ @user.destroy }.to change{ @user.recipients.count }.to(0)
+      end
+    end
   end
 end

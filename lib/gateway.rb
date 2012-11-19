@@ -1,6 +1,5 @@
 module GiftRecommendation
   class Gateway
-    NoPersonas = Class.new(StandardError)
     
     def initialize(recipient)
       @recipient = recipient
@@ -8,7 +7,7 @@ module GiftRecommendation
     end
 
     def recommend
-      raise NoPersonas if @recipient.personas.count == 0
+      raise StandardError, "No Personas" if @recipient.personas.count == 0
       @recommendation.recommendation
     end
 

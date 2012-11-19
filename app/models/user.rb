@@ -16,7 +16,7 @@
 #
 
 class User < ActiveRecord::Base
-  has_many :recipients
+  has_many :recipients, :dependent => :destroy
   has_many :events, :order => 'date ASC'
   attr_accessible :email
 
