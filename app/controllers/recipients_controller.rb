@@ -6,6 +6,7 @@ class RecipientsController < ApplicationController
   before_filter :get_user
 
   def import_friends
+    @imported_friends = @user.recipients.collect{ |friend| friend.fb_id }
     if request.referer == user_recipients_url(@user)
       session[:return_to] = request.referer
     else

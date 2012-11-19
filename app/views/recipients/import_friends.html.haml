@@ -1,9 +1,9 @@
-
 #fb-root.fb_reset
 
 %div.row
   %div.span6
     %h3.offset1 Import your Facebook friends
+    #imported-friends-data{:data => {:imported_friends => "#{@imported_friends}"}}
     #friends-list
       %form
         %ul{:data => { :user_id => @user.id}}

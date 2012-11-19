@@ -63,12 +63,20 @@ define([
 
     processFBResponse: function() {
       var _this = this;
-      this.fbFriends.then(function( friends ){
+      var previouslyImportedFriends = $('div#imported-friends-data').data().imported_friends
+      _this.fbFriends.then(function( friends ){
         var collection = new FriendsCollection();
 
-        _.each( friends,function( friend ){
-          collection.add( _this.initFacebookData( friend ) );
+        _.each( friends, function( friend ){
+          if ( previouslyImportedFriends.indexOf(friend.id) < 0 ) {
+            collection.add( _this.initFacebookData( friend ) );
+          }
         });
+
+        // all facebook friends are already saved to server
+        if ( collection.length === 0 ) {
+            $('div#imported-friends-data').append("<h4>No more friends to import. Use this feature when you've made new friends on Facebook. Click button below to continue.</h4>")
+        }
 
         Giftola.Friends =  new FriendsList( { collection: collection } );
         
