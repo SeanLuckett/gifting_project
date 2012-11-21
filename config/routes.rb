@@ -18,7 +18,7 @@ Giftola::Application.routes.draw do
   end
 
   namespace :api do
-    match '/recommendation/generate', :to => 'recommendations#generate'
+    get '/recommendations/generate', :to => 'recommendations#generate'
   end
 
   # Facebook recommends a "Channel file." This is one way to implement it in Rails
