@@ -12,6 +12,7 @@ gem 'annotate', group: :development
 gem 'omniauth-facebook'
 gem 'requirejs-rails'
 gem 'vacuum'
+gem 'rabl'
 
 group :test do
   gem 'database_cleaner', "~> 0.7.2"
@@ -27,8 +28,6 @@ group :development, :test do
   gem 'debugger'
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9.1'
-  gem 'vcr', '1.6.0'
-  gem 'webmock', '1.6.2'
 end
 
 # Gems used only for assets and not required

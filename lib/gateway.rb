@@ -57,10 +57,12 @@ module GiftRecommendation
     private
 
     def top_recommendation
+      # arbitrary
       @top_recommended = @items.first
     end
 
     def alternative_recommendations
+      # arbitrary
       @alt_recommended = @items[-9, 5]
     end
 
