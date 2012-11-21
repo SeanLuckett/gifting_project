@@ -3,21 +3,25 @@ require 'spec_helper'
 #NOTE: Gateway should use Vacuum gem to wrap Amazon API requests.
 # This is blocked until Associate/Affiliate ID/TAG is resolved/provided.
 describe GiftRecommendation::Gateway do
+  before do
+    persona = create(:persona, :title => "Nerd")
+    @recipient = create(:recipient, :personas => [persona])
+    GiftRecommendation::Recommendation.any_instance.stub(:recommendation).and_return( {:key => "value"} )
+  end
+
+  describe "Making the api request" do
+    subject { GiftRecommendation::Gateway.new(@recipient) }
+
+    it "temp" do
+    end
+  end
+
   describe "Manipulating a recommendation" do
     context "when recipient has at least one associated persona" do
-      before do
-        persona = create(:persona, :title => "Nerd")
-        @recipient = create(:recipient, :personas => [persona])
-        GiftRecommendation::Recommendation.any_instance.stub(:recommendation).and_return( {:key => "value"} )
-      end
 
       subject { GiftRecommendation::Gateway.new(@recipient) }
 
-      its(:recommend) { should be_kind_of(Hash) }
-
-      it "returns recommendation in json" do
-        subject.recommend_to_json.should == "{\"key\":\"value\"}"
-      end
+      its(:recommend) { should be_kind_of(GiftRecommendation::Recommendation) }
     end
 
     context "when recipient has no personas" do
@@ -31,7 +35,23 @@ describe GiftRecommendation::Gateway do
   end
 
   describe "Remote shopping cart" do
-    pending "Must have amazon api keys and fully functional ApiRequest and Recommendation."
+    pending "will get built during email building phase."
+  end
+end
+
+describe GiftRecommendation::ApiRequest do
+  # This will get more sophisticated but, for now, just uses one browsenode (PS3)
+  # for Nerd persona
+  describe "Making a (basic) Amazon request" do
+    before :each do
+      @persona = double("Persona")
+      @persona.stub(:title) { "Nerd" }
+    end
+
+    it "returns a response in xml" do
+      api = GiftRecommendation::ApiRequest.new(@persona)
+      api.request.class.should == Excon::Response
+    end
   end
 end
 
@@ -39,34 +59,14 @@ describe GiftRecommendation::Recommendation do
   describe "#recommendation" do
     before do
       GiftRecommendation::ApiRequest
-        .any_instance.stub(:results)
-        .and_return( {:key => "value"})
+        .any_instance.stub(:request)
+        .and_return( [{:asin => "num", :title => "title", :url => "path_to_amazon"}])
 
       persona = create(:persona, :title => "Nerd")
       @recipient = create(:recipient, :personas => [persona])
+      @items = GiftRecommendation::ApiRequest.new(persona).request
     end
-    subject { GiftRecommendation::Recommendation.new(@recipient) }
+    subject { GiftRecommendation::Recommendation.new(@recipient, @items) }
 
-    its(:recommendation) { should be_kind_of(Hash) }
-
-    describe "the returned hash includes" do
-      let(:recommendation) { subject.recommendation }
-
-      it "recipient name" do
-        recommendation.has_value?(@recipient.name).should be_true
-      end
-
-      it "titles of associated personas" do
-        recommendation[:personas].should include @recipient.personas.first.title
-      end
-
-      it "the top recommended item" do
-        recommendation.include?(:top_recommended).should be_true
-      end
-
-      it "alternative recommendations" do
-        recommendation.include?(:alternative_recommended).should be_true
-      end
-    end
   end
 end

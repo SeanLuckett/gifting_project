@@ -1,58 +1,88 @@
+require 'nokogiri'
+
 module GiftRecommendation
   class Gateway
+    # nodeset = xml_obj.xpath("//am:node_name", "am" => "NAMESPACE") is how this is used
+    NAMESPACE = "http://webservices.amazon.com/AWSECommerceService/2011-08-01"
     
     def initialize(recipient)
       @recipient = recipient
-      @recommendation = Recommendation.new(@recipient)
+      @api_request = ApiRequest.new("Nerd") #hardcoded to just one person: "Nerd" for now
     end
 
     def recommend
       raise StandardError, "No Personas" if @recipient.personas.count == 0
-      @recommendation.recommendation
+      node_set = process_request
+      items = extract_items(node_set)
+      recommendation = Recommendation.new(@recipient, items).build
+
+      recommendation
     end
 
-    def recommend_to_json
-      @recommendation.recommendation.to_json
+    private
+    def process_request
+      xml = Nokogiri::XML(@api_request.request.body)
+      xml.xpath("//amazon:TopItem", "amazon" => NAMESPACE)
+    end
+
+    def extract_items(nodes)
+      items = []
+      nodes.each do |node|
+        item = {}
+        item[:asin] = node.children[0].text #amazon product id
+        item[:title] = node.children[1].text
+        item[:url] = node.children[2].text
+        items << item
+      end
+      
+      items.uniq { |i| i[:asin] }
     end
   end
 
   # Put in own file
   class Recommendation
-    def initialize(recipient)
+    attr_reader :recipient, :top_recommended, :alt_recommended
+
+    def initialize(recipient, items)
       @recipient = recipient
-      @request = ApiRequest.new(get_personas)
+      @items = items
     end
 
-    def recommendation
-      {
-        :name => @recipient.name,
-        :personas => get_personas,
-        :top_recommended => top_recommended, 
-        :alternative_recommended => alternative_recommended
-      }
+    def build
+      self
     end
 
     private
-    def get_personas
-      @recipient.personas.map(&:title)
-    end
 
-    def top_recommended
+    def top_recommendation
       ""
     end
 
-    def alternative_recommended
+    def alternative_recommendations
       ["gift1", "gift2"]
     end
 
   end
 
+  # separate file
   class ApiRequest
-    def initialize(personas)
-      @personas = personas
-    end
-  end
+    def initialize(persona)
+      @persona = persona
+      creds = YAML.load_file Rails.root + 'config/amazon.yml'
+      @request = Vacuum.new
+      @request.configure(creds)
 
-  class Gift
+      @scopes = %w(MostGifted MostWishedFor TopSellers).join(',')
+    end
+
+    def request
+      params = {
+        'Operation' => 'BrowseNodeLookup',
+      'BrowseNodeId' => '14210751', #hardcoded to ps3 games for Nerd persona for now
+      'ResponseGroup' => @scopes
+      }
+
+      @request.get(query: params)
+    end
   end
 end

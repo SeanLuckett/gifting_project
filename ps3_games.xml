@@ -1,0 +1,269 @@
+<?xml version="1.0"?>
+<BrowseNodeLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01">
+  <OperationRequest>
+    <HTTPHeaders>
+      <Header Name="UserAgent" Value="Jeff/0.4.3 (Language=Ruby; Red-Dwarf.local)"/>
+    </HTTPHeaders>
+    <RequestId>8af66d29-5c53-444f-b256-9a02d0b733be</RequestId>
+    <Arguments>
+      <Argument Name="Operation" Value="BrowseNodeLookup"/>
+      <Argument Name="Service" Value="AWSECommerceService"/>
+      <Argument Name="Signature" Value="2ci673q6Vl46W1YtP4qT7XfF3K7y569eFTrMei9VW3g="/>
+      <Argument Name="AssociateTag" Value="giftoladev-20"/>
+      <Argument Name="Version" Value="2011-08-01"/>
+      <Argument Name="BrowseNodeId" Value="14210751"/>
+      <Argument Name="SignatureMethod" Value="HmacSHA256"/>
+      <Argument Name="AWSAccessKeyId" Value="AKIAIHPRRYDWKYUSD2YQ"/>
+      <Argument Name="Timestamp" Value="2012-11-20T22:00:43Z"/>
+      <Argument Name="ResponseGroup" Value="MostGifted,MostWishedFor,TopSellers"/>
+      <Argument Name="SignatureVersion" Value="2"/>
+    </Arguments>
+    <RequestProcessingTime>0.434221</RequestProcessingTime>
+  </OperationRequest>
+  <BrowseNodes>
+    <Request>
+      <IsValid>True</IsValid>
+      <BrowseNodeLookupRequest>
+        <BrowseNodeId>14210751</BrowseNodeId>
+        <ResponseGroup>MostGifted</ResponseGroup>
+        <ResponseGroup>MostWishedFor</ResponseGroup>
+        <ResponseGroup>TopSellers</ResponseGroup>
+      </BrowseNodeLookupRequest>
+    </Request>
+    <BrowseNode>
+      <BrowseNodeId>14210751</BrowseNodeId>
+      <Name>PlayStation 3</Name>
+      <TopSellers>
+        <TopSeller>
+          <ASIN>B007XVTR5S</ASIN>
+          <Title>Call of Duty: Black Ops II</Title>
+        </TopSeller>
+        <TopSeller>
+          <ASIN>B0050SXFKE</ASIN>
+          <Title>Assassin's Creed III</Title>
+        </TopSeller>
+        <TopSeller>
+          <ASIN>B0015AARJI</ASIN>
+          <Title>PlayStation 3 Dualshock 3 Wireless Controller (Black)</Title>
+        </TopSeller>
+        <TopSeller>
+          <ASIN>B0050SWQ86</ASIN>
+          <Title>PlayStation 3 500GB Assassin's Creed III Bundle</Title>
+        </TopSeller>
+        <TopSeller>
+          <ASIN>B008277M36</ASIN>
+          <Title>FIFA Soccer 13</Title>
+        </TopSeller>
+        <TopSeller>
+          <ASIN>B0050SWN2K</ASIN>
+          <Title>Call of Duty: Black Ops II [Hardened Edition]</Title>
+        </TopSeller>
+        <TopSeller>
+          <ASIN>B003O6HDHA</ASIN>
+          <Title>Silent Hill: Downpour</Title>
+        </TopSeller>
+        <TopSeller>
+          <ASIN>B007XYBUBE</ASIN>
+          <Title>PlayStation All-Stars Battle Royale</Title>
+        </TopSeller>
+        <TopSeller>
+          <ASIN>B002I0HIMI</ASIN>
+          <Title>NBA 2K12 (Covers May Vary)</Title>
+        </TopSeller>
+        <TopSeller>
+          <ASIN>B002I0H2G0</ASIN>
+          <Title>Hitman: Absolution</Title>
+        </TopSeller>
+      </TopSellers>
+      <TopItemSet>
+        <Type>MostGifted</Type>
+        <TopItem>
+          <ASIN>B008277M36</ASIN>
+          <Title>FIFA Soccer 13</Title>
+          <DetailPageURL>http://www.amazon.com/FIFA-Soccer-13-Playstation-3/dp/B008277M36%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB008277M36</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B007M6W3A0</ASIN>
+          <Title>NBA 2K13</Title>
+          <DetailPageURL>http://www.amazon.com/NBA-2K13-Playstation-3/dp/B007M6W3A0%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB007M6W3A0</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B0050SXLQC</ASIN>
+          <Title>Resident Evil 6</Title>
+          <DetailPageURL>http://www.amazon.com/Resident-Evil-6-Playstation-3/dp/B0050SXLQC%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0050SXLQC</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B0050SWN2K</ASIN>
+          <Title>Call of Duty: Black Ops II [Hardened Edition]</Title>
+          <DetailPageURL>http://www.amazon.com/Call-Duty-Black-Hardened-Playstation-3/dp/B0050SWN2K%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0050SWN2K</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B007XVTR5S</ASIN>
+          <Title>Call of Duty: Black Ops II</Title>
+          <DetailPageURL>http://www.amazon.com/Call-Duty-Black-Ops-Playstation-3/dp/B007XVTR5S%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB007XVTR5S</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B006VB2UMI</ASIN>
+          <Title>Madden NFL 13</Title>
+          <DetailPageURL>http://www.amazon.com/Madden-NFL-13-Playstation-3/dp/B006VB2UMI%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB006VB2UMI</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B003VUO6H4</ASIN>
+          <Title>PlayStation 3 160GB System</Title>
+          <DetailPageURL>http://www.amazon.com/PlayStation-3-160GB-System/dp/B003VUO6H4%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB003VUO6H4</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B0015AARJI</ASIN>
+          <Title>PlayStation 3 Dualshock 3 Wireless Controller (Black)</Title>
+          <DetailPageURL>http://www.amazon.com/PlayStation-Dualshock-Wireless-Controller-Black-3/dp/B0015AARJI%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0015AARJI</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B0050SX9VO</ASIN>
+          <Title>Borderlands 2</Title>
+          <DetailPageURL>http://www.amazon.com/Borderlands-2-Playstation-3/dp/B0050SX9VO%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0050SX9VO</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B0088MVODO</ASIN>
+          <Title>Resident Evil 6 Anthology</Title>
+          <DetailPageURL>http://www.amazon.com/Resident-Evil-6-Anthology-Playstation-3/dp/B0088MVODO%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0088MVODO</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+      </TopItemSet>
+      <TopItemSet>
+        <Type>MostWishedFor</Type>
+        <TopItem>
+          <ASIN>B0050SXFKE</ASIN>
+          <Title>Assassin's Creed III</Title>
+          <DetailPageURL>http://www.amazon.com/Assassins-Creed-III-Playstation-3/dp/B0050SXFKE%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0050SXFKE</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B007XVTR5S</ASIN>
+          <Title>Call of Duty: Black Ops II</Title>
+          <DetailPageURL>http://www.amazon.com/Call-Duty-Black-Ops-Playstation-3/dp/B007XVTR5S%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB007XVTR5S</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B007CM0K86</ASIN>
+          <Title>The Last of Us</Title>
+          <DetailPageURL>http://www.amazon.com/Last-Us-Playstation-3/dp/B007CM0K86%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB007CM0K86</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B0050SXLQC</ASIN>
+          <Title>Resident Evil 6</Title>
+          <DetailPageURL>http://www.amazon.com/Resident-Evil-6-Playstation-3/dp/B0050SXLQC%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0050SXLQC</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B008CP6MA2</ASIN>
+          <Title>God of War Saga Collection</Title>
+          <DetailPageURL>http://www.amazon.com/God-War-Saga-Collection-Playstation-3/dp/B008CP6MA2%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB008CP6MA2</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B005C2D1YI</ASIN>
+          <Title>Dishonored</Title>
+          <DetailPageURL>http://www.amazon.com/Dishonored-Playstation-3/dp/B005C2D1YI%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB005C2D1YI</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B003VUO6H4</ASIN>
+          <Title>PlayStation 3 160GB System</Title>
+          <DetailPageURL>http://www.amazon.com/PlayStation-3-160GB-System/dp/B003VUO6H4%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB003VUO6H4</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B0050SX9VO</ASIN>
+          <Title>Borderlands 2</Title>
+          <DetailPageURL>http://www.amazon.com/Borderlands-2-Playstation-3/dp/B0050SX9VO%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0050SX9VO</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B0088MVODO</ASIN>
+          <Title>Resident Evil 6 Anthology</Title>
+          <DetailPageURL>http://www.amazon.com/Resident-Evil-6-Anthology-Playstation-3/dp/B0088MVODO%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0088MVODO</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B004EQCCI4</ASIN>
+          <Title>Uncharted 3: Drake's Deception</Title>
+          <DetailPageURL>http://www.amazon.com/Uncharted-3-Drakes-Deception-Playstation/dp/B004EQCCI4%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB004EQCCI4</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+      </TopItemSet>
+      <TopItemSet>
+        <Type>TopSellers</Type>
+        <TopItem>
+          <ASIN>B007XVTR5S</ASIN>
+          <Title>Call of Duty: Black Ops II</Title>
+          <DetailPageURL>http://www.amazon.com/Call-Duty-Black-Ops-Playstation-3/dp/B007XVTR5S%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB007XVTR5S</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B0050SXFKE</ASIN>
+          <Title>Assassin's Creed III</Title>
+          <DetailPageURL>http://www.amazon.com/Assassins-Creed-III-Playstation-3/dp/B0050SXFKE%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0050SXFKE</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B0015AARJI</ASIN>
+          <Title>PlayStation 3 Dualshock 3 Wireless Controller (Black)</Title>
+          <DetailPageURL>http://www.amazon.com/PlayStation-Dualshock-Wireless-Controller-Black-3/dp/B0015AARJI%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0015AARJI</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B0050SWQ86</ASIN>
+          <Title>PlayStation 3 500GB Assassin's Creed III Bundle</Title>
+          <DetailPageURL>http://www.amazon.com/PlayStation-500GB-Assassins-Creed-Bundle-3/dp/B0050SWQ86%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0050SWQ86</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B008277M36</ASIN>
+          <Title>FIFA Soccer 13</Title>
+          <DetailPageURL>http://www.amazon.com/FIFA-Soccer-13-Playstation-3/dp/B008277M36%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB008277M36</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B0050SWN2K</ASIN>
+          <Title>Call of Duty: Black Ops II [Hardened Edition]</Title>
+          <DetailPageURL>http://www.amazon.com/Call-Duty-Black-Hardened-Playstation-3/dp/B0050SWN2K%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB0050SWN2K</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B003O6HDHA</ASIN>
+          <Title>Silent Hill: Downpour</Title>
+          <DetailPageURL>http://www.amazon.com/Silent-Hill-Downpour-Playstation-3/dp/B003O6HDHA%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB003O6HDHA</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B007XYBUBE</ASIN>
+          <Title>PlayStation All-Stars Battle Royale</Title>
+          <DetailPageURL>http://www.amazon.com/PlayStation-All-Stars-Battle-Royale-3/dp/B007XYBUBE%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB007XYBUBE</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B002I0HIMI</ASIN>
+          <Title>NBA 2K12 (Covers May Vary)</Title>
+          <DetailPageURL>http://www.amazon.com/NBA-2K12-Covers-Vary-Playstation-3/dp/B002I0HIMI%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB002I0HIMI</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+        <TopItem>
+          <ASIN>B002I0H2G0</ASIN>
+          <Title>Hitman: Absolution</Title>
+          <DetailPageURL>http://www.amazon.com/Hitman-Absolution-Playstation-3/dp/B002I0H2G0%3FSubscriptionId%3DAKIAIHPRRYDWKYUSD2YQ%26tag%3Dgiftoladev-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB002I0H2G0</DetailPageURL>
+          <ProductGroup>Video Games</ProductGroup>
+        </TopItem>
+      </TopItemSet>
+    </BrowseNode>
+  </BrowseNodes>
+</BrowseNodeLookupResponse>
