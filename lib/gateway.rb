@@ -49,17 +49,19 @@ module GiftRecommendation
     end
 
     def build
+      top_recommendation
+      alternative_recommendations
       self
     end
 
     private
 
     def top_recommendation
-      ""
+      @top_recommended = @items.first
     end
 
     def alternative_recommendations
-      ["gift1", "gift2"]
+      @alt_recommended = @items[-9, 5]
     end
 
   end
@@ -78,8 +80,8 @@ module GiftRecommendation
     def request
       params = {
         'Operation' => 'BrowseNodeLookup',
-      'BrowseNodeId' => '14210751', #hardcoded to ps3 games for Nerd persona for now
-      'ResponseGroup' => @scopes
+        'BrowseNodeId' => '14210751', #hardcoded to ps3 games for Nerd persona for now
+        'ResponseGroup' => @scopes
       }
 
       @request.get(query: params)

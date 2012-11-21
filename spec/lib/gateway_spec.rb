@@ -3,6 +3,7 @@ require 'spec_helper'
 #NOTE: Gateway should use Vacuum gem to wrap Amazon API requests.
 # This is blocked until Associate/Affiliate ID/TAG is resolved/provided.
 describe GiftRecommendation::Gateway do
+
   before do
     persona = create(:persona, :title => "Nerd")
     @recipient = create(:recipient, :personas => [persona])
@@ -12,8 +13,6 @@ describe GiftRecommendation::Gateway do
   describe "Making the api request" do
     subject { GiftRecommendation::Gateway.new(@recipient) }
 
-    it "temp" do
-    end
   end
 
   describe "Manipulating a recommendation" do

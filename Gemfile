@@ -27,6 +27,8 @@ group :development, :test do
   gem 'debugger'
   gem 'guard-rspec'
   gem 'rb-fsevent', '~> 0.9.1'
+  gem 'vcr', '1.6.0'
+  gem 'webmock', '1.6.2'
 end
 
 # Gems used only for assets and not required
