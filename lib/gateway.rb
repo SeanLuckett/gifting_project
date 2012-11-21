@@ -14,6 +14,7 @@ module GiftRecommendation
       raise StandardError, "No Personas" if @recipient.personas.count == 0
       node_set = process_request
       items = extract_items(node_set)
+      items.sort! { |item1, item2| item1[:weight] <=> item2[:weight] }
       recommendation = Recommendation.new(@recipient, items).build
 
       recommendation
@@ -26,16 +27,25 @@ module GiftRecommendation
     end
 
     def extract_items(nodes)
+      asins = []
       items = []
       nodes.each do |node|
         item = {}
         item[:asin] = node.children[0].text #amazon product id
-        item[:title] = node.children[1].text
-        item[:url] = node.children[2].text
+        if asins.include? item[:asin]
+          index = items.rindex {|i| i[:asin] == item[:asin]}
+          item = items.delete_at(index)
+          item[:weight] += 1
+        else
+          item[:title] = node.children[1].text
+          item[:url] = node.children[2].text
+          item[:weight] = 1
+          asins << item[:asin]
+        end
         items << item
       end
-      
-      items.uniq { |i| i[:asin] }
+
+      items
     end
   end
 
@@ -57,13 +67,13 @@ module GiftRecommendation
     private
 
     def top_recommendation
-      # arbitrary
-      @top_recommended = @items.first
+      # Top item sorted to back of array
+      @top_recommended = @items.last
     end
 
     def alternative_recommendations
       # arbitrary
-      @alt_recommended = @items[-9, 5]
+      @alt_recommended = @items[-6, 5]
     end
 
   end
