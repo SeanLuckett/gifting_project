@@ -2,11 +2,11 @@ require 'nokogiri'
 
 module GiftRecommendation
   class Gateway
-    # nodeset = xml_obj.xpath("//am:node_name", "am" => "NAMESPACE") is how this is used
     NAMESPACE = "http://webservices.amazon.com/AWSECommerceService/2011-08-01"
     
-    def initialize(recipient)
+    def initialize(recipient, event)
       @recipient = recipient
+      @event = event
       @api_request = ApiRequest.new("Nerd") #hardcoded to just one person: "Nerd" for now
     end
 
@@ -15,7 +15,7 @@ module GiftRecommendation
       node_set = process_request
       items = extract_items(node_set)
       items.sort! { |item1, item2| item1[:weight] <=> item2[:weight] }
-      recommendation = Recommendation.new(@recipient, items).build
+      recommendation = Recommendation.new(@recipient, @event, items).build
 
       recommendation
     end
@@ -51,10 +51,11 @@ module GiftRecommendation
 
   # Put in own file
   class Recommendation
-    attr_reader :recipient, :top_recommended, :alt_recommended
+    attr_reader :recipient, :top_recommended, :alt_recommended, :event
 
-    def initialize(recipient, items)
+    def initialize(recipient, event, items)
       @recipient = recipient
+      @event = event
       @items = items
     end
 
@@ -73,7 +74,7 @@ module GiftRecommendation
 
     def alternative_recommendations
       # arbitrary
-      @alt_recommended = @items[-6, 5]
+      @alt_recommended = @items[-6, 5].sort! { |item1, item2| item2[:weight] <=> item1[:weight] }
     end
 
   end

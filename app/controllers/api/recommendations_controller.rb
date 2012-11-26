@@ -9,7 +9,8 @@ class Api::RecommendationsController < ApplicationController
 
   def generate
     recipient = current_user.recipients.first #hard coded for now
-    gateway = Gateway.new(recipient)
+    event = current_user.events.first #also hard coded for now
+    gateway = Gateway.new(recipient, event)
 
     @recommendation = gateway.recommend
     respond_with @recommendation

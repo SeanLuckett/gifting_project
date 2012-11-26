@@ -7,18 +7,19 @@ describe GiftRecommendation::Gateway do
   before do
     persona = create(:persona, :title => "Nerd")
     @recipient = create(:recipient, :personas => [persona])
+    @event = Event.new(:title => "Christmas")
     GiftRecommendation::Recommendation.any_instance.stub(:recommendation).and_return( {:key => "value"} )
   end
 
   describe "Making the api request" do
-    subject { GiftRecommendation::Gateway.new(@recipient) }
+    subject { GiftRecommendation::Gateway.new(@recipient, @event) }
 
   end
 
   describe "Manipulating a recommendation" do
     context "when recipient has at least one associated persona" do
 
-      subject { GiftRecommendation::Gateway.new(@recipient) }
+      subject { GiftRecommendation::Gateway.new(@recipient, @event) }
 
       its(:recommend) { should be_kind_of(GiftRecommendation::Recommendation) }
     end
@@ -65,7 +66,7 @@ describe GiftRecommendation::Recommendation do
       @recipient = create(:recipient, :personas => [persona])
       @items = GiftRecommendation::ApiRequest.new(persona).request
     end
-    subject { GiftRecommendation::Recommendation.new(@recipient, @items) }
+    subject { GiftRecommendation::Recommendation.new(@recipient, @event, @items) }
 
   end
 end
