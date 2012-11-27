@@ -29,6 +29,19 @@
       = rec.text_field :spend_at_most, :class => 'input-mini'
       %span.add-on .00
 
+  #div.control-group
+    %p.field-description Giving an address for this person enables us to send them gifts.
+    = rec.label "Street address:"
+    = rec.text_field :address1
+
+    = rec.label "Apartment number:"
+    = rec.text_field :address2
+
+    = rec.label :city
+    = rec.text_field :city
+
+    = rec.label :state
+    = rec.select :state, options_for_select(us_states)
   %p.field-description Personas describe common interests for many of a type. Select one or more to describe this person. You can do this any time.
   - @personas.each do |persona|
     %label.checkbox

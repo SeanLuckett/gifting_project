@@ -9,6 +9,8 @@ FactoryGirl.define do
     spend_at_least 5
     spend_at_most 25
     birthday { 21.years.ago }
+    age 21
+    state "CO"
     user
   end
 

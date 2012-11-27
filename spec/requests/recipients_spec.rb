@@ -17,6 +17,7 @@ describe "Recipients" do
     context "when viewing user's recipients" do
       it { should have_content "Phil" }
       it { should have_content "Janice" }
+      it { should have_content "Age is blank." }
     end
 
     context "when clicking a recipient" do

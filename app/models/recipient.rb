@@ -12,6 +12,12 @@
 #  user_id        :integer
 #  spend_at_least :integer
 #  spend_at_most  :integer
+#  age            :string(255)
+#  address1       :string(255)
+#  address2       :string(255)
+#  state          :string(2)
+#  city           :string(255)
+#  zip_code       :string(255)
 #
 
 class Recipient < ActiveRecord::Base
@@ -19,11 +25,13 @@ class Recipient < ActiveRecord::Base
   has_and_belongs_to_many :personas
   has_and_belongs_to_many :events
   attr_accessible :birthday, :image, :name, :fb_id, :spend_at_least,
-                  :spend_at_most, :persona_ids, :event_ids
+                  :spend_at_most, :persona_ids, :event_ids, :age, :address1,
+                  :address2, :city, :state, :zip_code
 
   validates :name, presence: true
   validates :spend_at_least, :spend_at_most,
               :numericality => { :only_integer => true }, :unless => "spend_at_least.blank?" 
+  validates :age, :numericality => { :only_integer => true }, :unless => "age.blank?"
   validate :spend_at_least_is_less_than_spend_at_most
 
   def first_name
@@ -38,11 +46,23 @@ class Recipient < ActiveRecord::Base
     end
   end
 
+  def warnings
+    warnings = []
+    warnings << "Age is blank." if self.age.blank?
+    warnings << "Address is incomplete." if self.address_valid?
+
+    warnings
+  end
+
   def spend_at_least_is_less_than_spend_at_most
     unless spend_at_least.blank? || spend_at_most.blank?
       if spend_at_least >= spend_at_most
         errors.add(:spend_at_least, "can't be greater than, or the same as, spend at most.")
       end
     end
+  end
+
+  def address_valid?
+    state.blank? || address1.blank? || zip_code.blank? || city.blank?
   end
 end

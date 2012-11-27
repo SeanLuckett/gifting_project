@@ -31,6 +31,17 @@
   left: 80px;
 }
 
+.rec-warnings {
+  position: absolute;
+  display: block;
+  top: 90px;
+  left: 80px;
+}
+
+.rec-warnings span {
+  color: red;
+}
+
 .rec-min-max {
   position: absolute;
   top: 80px;

@@ -34,9 +34,6 @@ describe GiftRecommendation::Gateway do
     end
   end
 
-  describe "Remote shopping cart" do
-    pending "will get built during email building phase."
-  end
 end
 
 describe GiftRecommendation::ApiRequest do
