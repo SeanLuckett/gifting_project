@@ -1,4 +1,4 @@
-load Rails.root + "lib/gateway.rb"
+# load Rails.root + "lib/gateway.rb"
 
 class Api::RecommendationsController < ApplicationController
   respond_to :json
