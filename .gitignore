@@ -21,3 +21,8 @@
 /config/sendgrid.yml
 /config/amazon.yml
 .jhw-cache/
+
+# recommendation gateway causes trouble because it uses yaml file for Amazon creds
+# for now, leaving the files out.
+/lib/gateway.rb
+/spec/lib gateway_spec.rb
