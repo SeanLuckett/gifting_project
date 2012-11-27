@@ -60,10 +60,32 @@ describe Recipient do
     its(:first_name) { should == "MyString" }
   end
 
+  describe "#age" do
+    context "When birthday is missing" do
+      before { subject.birthday = nil }
+      specify { subject.age.blank?.should be_true }
+    end
+
+    context "When birthday is next day" do
+      before { subject.birthday = Date.tomorrow.change(:year => 21.years.ago.year) }
+      it { subject.age.should == 20 }
+    end
+
+    context "When birthday was yesterday" do
+      before { subject.birthday = Date.yesterday.change(:year => 21.years.ago.year) }
+      it { subject.age.should == 21 }
+    end
+
+    context "When birthday is today" do
+      before { subject.birthday = Date.today.change(:year => 21.years.ago.year) }
+      it { subject.age.should == 21 }
+    end
+  end
+
   describe "Missing data warnings" do
-    context "when age is missing" do
-      it { expect{ subject.age = "" }.to change{subject.warnings.count}.by(1) }
-      it { expect{ subject.warnings.include? "Age is blank." }.to be_true }
+    context "when birthday is missing, age can't be determined" do
+      it { expect{ subject.birthday = "" }.to change{subject.warnings.count}.by(1) }
+      it { expect{ subject.warnings.include? "Birthday is blank." }.to be_true }
     end
 
     context "when address is incomplete" do

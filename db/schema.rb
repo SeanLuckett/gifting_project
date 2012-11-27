@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(:version => 20121126215259) do
     t.integer  "user_id"
     t.integer  "spend_at_least"
     t.integer  "spend_at_most"
-    t.string   "age"
     t.string   "address1"
     t.string   "address2"
     t.string   "state",          :limit => 2

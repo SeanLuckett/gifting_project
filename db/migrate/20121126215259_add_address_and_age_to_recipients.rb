@@ -1,7 +1,6 @@
 class AddAddressAndAgeToRecipients < ActiveRecord::Migration
   def change
-    add_column :recipients, :age, :string
-    
+    # don't add age; was a mistake
     add_column :recipients, :address1, :string
     add_column :recipients, :address2, :string
     add_column :recipients, :state, :string, :limit => 2

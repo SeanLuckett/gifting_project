@@ -42,6 +42,9 @@
 
     = rec.label :state
     = rec.select :state, options_for_select(us_states)
+
+    = rec.label :zip_code
+    = rec.text_field :zip_code
   %p.field-description Personas describe common interests for many of a type. Select one or more to describe this person. You can do this any time.
   - @personas.each do |persona|
     %label.checkbox

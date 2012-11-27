@@ -25,14 +25,18 @@ class Recipient < ActiveRecord::Base
   has_and_belongs_to_many :personas
   has_and_belongs_to_many :events
   attr_accessible :birthday, :image, :name, :fb_id, :spend_at_least,
-                  :spend_at_most, :persona_ids, :event_ids, :age, :address1,
+                  :spend_at_most, :persona_ids, :event_ids, :address1,
                   :address2, :city, :state, :zip_code
 
   validates :name, presence: true
   validates :spend_at_least, :spend_at_most,
               :numericality => { :only_integer => true }, :unless => "spend_at_least.blank?" 
-  validates :age, :numericality => { :only_integer => true }, :unless => "age.blank?"
   validate :spend_at_least_is_less_than_spend_at_most
+  validates_format_of :zip_code,
+                      :with => /^\d{5}(-\d{4})?$/,
+                      :message => "should be 12345 or 12345-1234",
+                      :allow_nil => true,
+                      :allow_blank => true
 
   def first_name
     self.name.split(" ").first
@@ -46,10 +50,19 @@ class Recipient < ActiveRecord::Base
     end
   end
 
+  def age
+    return self.birthday if self.birthday.blank?
+
+    now = Time.now.utc.to_date
+    # has their birthday happened yet?  Covers Feb. 29th, too
+    year_offset = ((now.month > self.birthday.month || (now.month == self.birthday.month && now.day >= self.birthday.day)) ? 0 : 1)
+    now.year - self.birthday.year - year_offset
+  end
+
   def warnings
     warnings = []
-    warnings << "Age is blank." if self.age.blank?
-    warnings << "Address is incomplete." if self.address_valid?
+    warnings << "Birthday is blank." if self.birthday.blank?
+    warnings << "Address is incomplete." if self.address_incomplete?
 
     warnings
   end
@@ -62,7 +75,7 @@ class Recipient < ActiveRecord::Base
     end
   end
 
-  def address_valid?
+  def address_incomplete?
     state.blank? || address1.blank? || zip_code.blank? || city.blank?
   end
 end

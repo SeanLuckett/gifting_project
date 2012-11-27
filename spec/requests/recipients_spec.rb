@@ -7,9 +7,9 @@ describe "Recipients" do
 
   describe "#index" do
     before do
-      ["Phil", "Janice"].each do |name|
-        user.recipients.create(:name => name)
-      end
+        user.recipients.create(:name => "Phil", :address1 => "Fleet Street", :birthday => 21.years.ago.to_date,
+                               :city => "Denver", :state => "CO", :zip_code => "80202")
+        user.recipients.create(:name => "Janice")
 
       visit user_recipients_path(user)
     end
@@ -17,7 +17,6 @@ describe "Recipients" do
     context "when viewing user's recipients" do
       it { should have_content "Phil" }
       it { should have_content "Janice" }
-      it { should have_content "Age is blank." }
     end
 
     context "when clicking a recipient" do
@@ -41,6 +40,12 @@ describe "Recipients" do
       it "routes to recipients/inport_friends" do
         current_path.should == import_friends_path
       end
+    end
+
+    context "when recipient is missing needed data" do
+      # janice, in this case
+      it { should have_content "Birthday is blank." }
+      it { should have_content "Address is incomplete."}
     end
   end
 
