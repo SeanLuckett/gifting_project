@@ -26,3 +26,4 @@
 # for now, leaving the files out.
 /lib/gateway.rb
 /spec/lib gateway_spec.rb
+/app/controllers/api/recommendations_controller.rb
