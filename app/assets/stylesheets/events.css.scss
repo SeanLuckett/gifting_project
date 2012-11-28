@@ -6,6 +6,14 @@
   margin-left: 10px;
 }
 
+img.has-warnings {
+  border: 2px solid red;
+}
+
+span.has-warnings {
+  color: red;
+}
+
 .delete-event {
   float: right;
   margin-top: -10px;

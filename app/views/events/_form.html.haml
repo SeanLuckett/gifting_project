@@ -27,7 +27,8 @@
   %p.field-description Do you have a person, or several in mind for this person?  Select as many as you'd like, and I'll recommend gifts when the date is nigh. 
   - @event.user.recipients.each do |recipient|
     %label.checkbox
-      #{recipient.name}
+      = "#{recipient.name}"
+      %span.has-warnings= "(#{recipient.warnings.join(' ')})"
       = check_box_tag "event[recipient_ids][]", recipient.id, @event.recipients.include?(recipient)
 
   = event.button "Done", :class => 'btn'

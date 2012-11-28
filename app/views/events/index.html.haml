@@ -27,7 +27,7 @@
         .event-recipients
           %p.recipient-heading Associated Recipients:
           - event.recipients.each do |recipient|
-            = link_to image_tag(recipient.image), edit_user_recipient_path(@user, recipient)
+            = display_recipient(recipient)
   .span1
     #new-event.pull-right
       .btn= link_to "New", new_user_event_path(current_user)
