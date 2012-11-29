@@ -31,4 +31,29 @@ describe Event do
     before { subject.date = " " }
     it { should_not be_valid }
   end
+
+  describe ".priority" do
+    context "when duration is 2 weeks" do
+      before do
+        @event1 = create(:event, :title => "Event1", :date => 2.weeks.since.to_date)
+        @event2 = create(:event, :title => "Event2", :date => 1.weeks.since.to_date)
+        @event3 = create(:event, :title => "Event3", :date => (2.weeks.since + 1.day).to_date)
+
+        @num_weeks = 2
+      end
+
+      it "returns events withing 2 weeks" do
+        Event.priority(@num_weeks).include?(@event1).should be_true
+        Event.priority(@num_weeks).include?(@event2).should be_true
+      end
+
+      it "doesn't return events outside 2 weeks" do
+        Event.priority(@num_weeks).include?(@event3).should be_false
+      end
+
+      it "sorts the list by date soonest to latest" do
+        Event.priority(@num_weeks).first.should == @event2
+      end
+    end
+  end
 end

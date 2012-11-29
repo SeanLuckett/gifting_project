@@ -108,4 +108,9 @@ describe Recipient do
       end
     end
   end
+
+  describe ".with_missing_data" do
+
+  end
+
 end

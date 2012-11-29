@@ -6,6 +6,7 @@
 
 .row
   %ul.nav.nav-tabs
+    %li= link_to "Dash", dashboard_index_path
     %li.active
       = link_to "Events", '#'
     %li= link_to "Recipients", user_recipients_path(current_user)

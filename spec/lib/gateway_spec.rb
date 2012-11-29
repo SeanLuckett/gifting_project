@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-#NOTE: Gateway should use Vacuum gem to wrap Amazon API requests.
-# This is blocked until Associate/Affiliate ID/TAG is resolved/provided.
 describe GiftRecommendation::Gateway do
 
   before do

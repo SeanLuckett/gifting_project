@@ -3,4 +3,16 @@
     =image_tag("http://www.placekitten.com/150/150")
   %h1 Dashboard
 .row
-  .btn= link_to "Manage Recipients", user_recipients_path(@user)
+  %ul.nav.nav-tabs
+    %li.active
+      = link_to "Dash", '#'
+    %li= link_to "Events", user_events_path(@user)
+    %li= link_to "Recipients", user_recipients_path(@user)
+  .span1
+  .span8
+
+.row
+  .span1
+  .span8
+    -#- @items.each do |item|
+      -#.item.well.well-large

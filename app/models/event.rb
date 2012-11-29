@@ -18,4 +18,8 @@ class Event < ActiveRecord::Base
   attr_accessible :date, :repeats, :title, :recipient_ids
 
   validates :title, :date, presence: true
+
+  def self.priority(num_weeks)
+    self.where("date <= ?", num_weeks.weeks.since.to_date).order("date ASC")
+  end
 end

@@ -34,7 +34,7 @@ describe "ConfirmEmail" do
 
         it "routes to users dashboard" do
           click_button 'Confirm'
-          current_path.should == user_events_path(user)
+          current_path.should == dashboard_index_path
         end
       end
     end

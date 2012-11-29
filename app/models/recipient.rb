@@ -38,6 +38,10 @@ class Recipient < ActiveRecord::Base
                       :allow_nil => true,
                       :allow_blank => true
 
+  def self.with_missing_data
+
+  end
+
   def first_name
     self.name.split(" ").first
   end
