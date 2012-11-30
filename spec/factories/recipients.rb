@@ -1,8 +1,12 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
+  sequence :id do |n|
+    n
+  end
+
   factory :recipient do
-    id 1
+    id
     fb_id 42
     name "MyString McMystring"
     image "/some/path_to/MyImage"

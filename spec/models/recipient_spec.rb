@@ -110,7 +110,21 @@ describe Recipient do
   end
 
   describe ".with_missing_data" do
+    before do
+      # missing address
+      @rec1 = create(:recipient, :name => "Sally")
 
+      # missing birthday
+      @rec2 = create(:recipient, :name => "Harry", :birthday => nil,
+                                 :address1 => "Street",
+                                 :city => "Springfield",
+                                 :state => "WA",
+                                 :zip_code => "80202")
+    end
+
+    let(:recipients_with_missing_data) { Recipient.with_missing_data }
+
+    specify { recipients_with_missing_data.count.should eq(2) }
   end
 
 end

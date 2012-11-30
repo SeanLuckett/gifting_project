@@ -39,7 +39,7 @@ class Recipient < ActiveRecord::Base
                       :allow_blank => true
 
   def self.with_missing_data
-
+    self.all.map { |r| r.warnings.count > 0 }
   end
 
   def first_name
