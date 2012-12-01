@@ -57,7 +57,7 @@ class Recipient < ActiveRecord::Base
   def age
     return self.birthday if self.birthday.blank?
 
-    now = Time.now.utc.to_date
+    now = Time.now.to_date
     # has their birthday happened yet?  Covers Feb. 29th, too
     year_offset = ((now.month > self.birthday.month || (now.month == self.birthday.month && now.day >= self.birthday.day)) ? 0 : 1)
     now.year - self.birthday.year - year_offset
