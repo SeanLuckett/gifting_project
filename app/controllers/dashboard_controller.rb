@@ -15,10 +15,14 @@ class DashboardController < ApplicationController
 
       redirect_to referrer
     end
+
+    @todo_items = build_information_feed
   end
 
   private
   def build_information_feed
+    results = Recipient.with_missing_data
+    results
   end
 
 end

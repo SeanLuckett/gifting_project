@@ -14,12 +14,23 @@ describe "Dashboard" do
       page.should have_link("Profile")
     end
 
-    describe "'news' feed" do
+    describe "missing data and upcoming events feed" do
       context "when recient has missing data" do
-        before { create(:recipient, :name => "Harry", :user_id => @user.id) }
+        before do
+          create(:recipient, :name => "Harry", :user_id => @user.id)
+          create(:recipient, :name => "Sally",
+                 :user_id => @user.id,
+                 :address1 => "123 main",
+                 :city => "Springfield",
+                 :state => "MO",
+                 :zip_code => "80002")
+
+          visit "/dashboard/index"
+        end
+
         it "shows on the list" do
-          pending "come back when to do items are represented and tested"
           page.should have_content "Harry"
+          page.should_not have_content "Sally"
         end
       end
     end

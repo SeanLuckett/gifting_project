@@ -62,22 +62,24 @@ describe Recipient do
 
   describe "#age" do
     context "When birthday is missing" do
-      before { subject.birthday = nil }
-      specify { subject.age.blank?.should be_true }
+      it "has no age" do
+        recipient = create(:recipient, :birthday => nil)
+        recipient.age.blank?.should be_true
+      end
     end
 
     context "When birthday is next day" do
-      before { subject.birthday = Date.tomorrow.change(:year => 21.years.ago.year) }
+      before { subject.birthday = Date.tomorrow.change(:year => 21.years.ago.year); subject.save! }
       it { subject.age.should == 20 }
     end
 
     context "When birthday was yesterday" do
-      before { subject.birthday = Date.yesterday.change(:year => 21.years.ago.year) }
+      before { subject.birthday = Date.yesterday.change(:year => 21.years.ago.year); subject.save! }
       it { subject.age.should == 21 }
     end
 
     context "When birthday is today" do
-      before { subject.birthday = Date.today.change(:year => 21.years.ago.year) }
+      before { subject.birthday = Date.today.change(:year => 21.years.ago.year); subject.save! }
       it { subject.age.should == 21 }
     end
   end
