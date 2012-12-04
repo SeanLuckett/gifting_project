@@ -16,4 +16,7 @@
   .span8
     - @todo_items.each do |item|
       .item.well.well-large
-        = item.name
+        - if item.respond_to?(:name)
+          = item.name
+        - else
+          = item.title

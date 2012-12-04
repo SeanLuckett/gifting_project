@@ -21,7 +21,8 @@ class DashboardController < ApplicationController
 
   private
   def build_information_feed
-    results = Recipient.with_missing_data
+    results = Event.priority(2, @user.id)
+    results.concat Recipient.with_missing_data
     results
   end
 

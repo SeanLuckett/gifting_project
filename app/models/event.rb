@@ -19,7 +19,7 @@ class Event < ActiveRecord::Base
 
   validates :title, :date, presence: true
 
-  def self.priority(num_weeks)
-    self.where("date <= ?", num_weeks.weeks.since.to_date).order("date ASC")
+  def self.priority(num_weeks, user_id)
+    self.where("user_id = ? AND date <= ?", user_id, num_weeks.weeks.since.to_date).order("date ASC")
   end
 end
