@@ -7,11 +7,6 @@ describe "ConfirmEmail" do
     before { sign_in_facebook_user }
     let(:user) { User.find_by_name("User Mcfoo") }
 
-    context "when user has a stored email address" do
-      let(:field_value) { find_field('user[email]').value }
-      it { field_value.should == user.email }
-    end
-
     context "when user has no stored email address" do
       # sets email to "" and reloads page
       before { user.update_attributes(:email => ""); visit current_path}
