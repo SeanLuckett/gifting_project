@@ -1,0 +1,8 @@
+.dash-recipient.well.well-large
+  = image_tag(recipient.image)
+  %h4.name= link_to recipient.name, edit_user_recipient_path(@user, recipient)
+  %h4.warning This person is missing information:
+  - recipient.warnings.each do |warning|
+    %h5.warning= warning
+    %p.explanation= recipient_explain(warning)
+

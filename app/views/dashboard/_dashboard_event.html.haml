@@ -1,0 +1,25 @@
+.dash-event.well.well-large
+  .event-title-date
+    %h3.title
+      = link_to event.title, edit_user_event_path(current_user, event)
+      %span.date= event.date
+
+  .recipients_warnings
+    %h4.warning-heading The following recipients have missing data:
+    - event.recipients.each do |recipient|
+      - if recipient.warnings.count > 0
+        .recipient-warn
+          %span.name= link_to recipient.name, edit_user_recipient_path(@user, recipient)
+          %br
+          %ul.warnings
+            - recipient.warnings.each do |warning|
+              %li= warning
+    %p.explanation
+      Giving Giftola more information for each of these recipients helps improve your experience.
+
+  .recipients-no-warnings
+    %h4 These recipients are good to go:
+    - event.recipients.each do |recipient|
+      %ul.recipients-without-warning
+        - unless recipient.warnings.count > 0
+          %li.name= recipient.name

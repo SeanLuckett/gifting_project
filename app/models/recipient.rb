@@ -12,7 +12,6 @@
 #  user_id        :integer
 #  spend_at_least :integer
 #  spend_at_most  :integer
-#  age            :string(255)
 #  address1       :string(255)
 #  address2       :string(255)
 #  state          :string(2)
@@ -37,7 +36,6 @@ class Recipient < ActiveRecord::Base
                       :message => "should be 12345 or 12345-1234",
                       :allow_nil => true,
                       :allow_blank => true
-  before_save :compute_age
 
   # Right now, this is all kinds of kittens
   # Change at some point
@@ -80,13 +78,12 @@ class Recipient < ActiveRecord::Base
     state.blank? || address1.blank? || zip_code.blank? || city.blank?
   end
 
-  private
-  def compute_age
+  def age
     return self.birthday if self.birthday.blank?
 
     now = Time.now.to_date
     # has their birthday happened yet?  Covers Feb. 29th, too
     year_offset = ((now.month > self.birthday.month || (now.month == self.birthday.month && now.day >= self.birthday.day)) ? 0 : 1)
-    self.age = now.year - self.birthday.year - year_offset
+    now.year - self.birthday.year - year_offset
   end
 end

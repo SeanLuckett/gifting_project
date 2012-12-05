@@ -12,11 +12,18 @@
   .span8
 
 .row
+  .span2
+  .span5
+    %h3 Things you should know about.
+  .span2
+
+.row
   .span1
-  .span8
+  .span6
     - @todo_items.each do |item|
-      .item.well.well-large
-        - if item.respond_to?(:name)
-          = item.name
-        - else
-          = item.title
+      - if item.respond_to?(:name)
+        = render :partial => "recipient_with_warnings", :locals => { :recipient => item }
+      - else
+        = render :partial => "dashboard_event", :locals => { :event => item }
+  .span2
+

@@ -13,22 +13,13 @@
   .span1
   .span4
     %h3 Select an event to edit
-  .span3
+  .span4
+    #new-event.pull-right
+      .btn= link_to "New", new_user_event_path(current_user)
 
 .row
   .span1
   .span6
     - @events.each do |event|
-      .event.well.well-large
-        %span.delete-event.badge= link_to 'X', user_event_path(current_user, event), :confirm => "Do you want to remove #{event.title}?", :method => :delete
-        .event-title-date
-          %h3.event-title
-            = link_to event.title, edit_user_event_path(current_user, event)
-            %span.event-date= event.date
-        .event-recipients
-          %p.recipient-heading Associated Recipients:
-          - event.recipients.each do |recipient|
-            = display_recipient(recipient)
-  .span1
-    #new-event.pull-right
-      .btn= link_to "New", new_user_event_path(current_user)
+      = render :partial => "event", :locals => { :event => event }
+

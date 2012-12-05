@@ -1,0 +1,25 @@
+.recipient.well.well-large
+  .rec-pic= image_tag(r.image)
+  %span.delete-rec.badge= link_to 'X', user_recipient_path(@user, r), :confirm => "Do you want to remove #{r.name}?", :method => :delete
+  %h4.rec-name
+    = link_to r.name, edit_user_recipient_path(@user, r)
+
+  %p.rec-warnings
+    - r.warnings.each do |warning|
+      %span= warning
+      %br
+
+  .rec-min-max
+    %h5= "Spend at least: $#{r.spend_at_least || 0}"
+    %h5= "Spend at most: $#{r.spend_at_most || 0}"
+
+  .rec-birthday
+    %h5
+      Birthday:
+      = display_recipient_birthday(r)
+
+  .rec-associated-events
+    %h5.event-heading 
+      Associated Events: 
+      - r.events.count.times do |i|
+        =link_to "#{r.events[i].title}", edit_user_event_path(@user, r.events[i])

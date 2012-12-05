@@ -12,6 +12,9 @@
     = rec.text_field :name
 
   #div.control-group
+    = "Age: #{@recipient.warnings.grep(/[Bb]irthday/).count > 0 ? "N/A" : @recipient.age}"
+
+  #div.control-group
     %p.field-description If you want to send birthday gifts, enter birthday:
     = rec.label :birthday
     = rec.date_select :birthday, {:start_year => Time.now.year - 90, :order => [:month, :day, :year], :include_blank => true}, {:class => 'input-medium'}

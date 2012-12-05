@@ -12,7 +12,6 @@
 #  user_id        :integer
 #  spend_at_least :integer
 #  spend_at_most  :integer
-#  age            :string(255)
 #  address1       :string(255)
 #  address2       :string(255)
 #  state          :string(2)
