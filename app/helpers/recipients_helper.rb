@@ -7,6 +7,11 @@ module RecipientsHelper
     end
   end
 
+  def selected_state(rec_id)
+    recipient = Recipient.find_by_id(rec_id)
+    recipient.state unless recipient.nil?
+  end
+
   def us_states
     [
       #['',   ''],
