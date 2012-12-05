@@ -4,11 +4,11 @@
       = link_to event.title, edit_user_event_path(current_user, event)
       %span.date= event.date
 
-  .recipients_warnings
-    %h4.warning-heading The following recipients have missing data:
+  .recipient-warnings
+    %h4 The following recipients have missing data:
     - event.recipients.each do |recipient|
       - if recipient.warnings.count > 0
-        .recipient-warn
+        .recipient-with-warnings
           %span.name= link_to recipient.name, edit_user_recipient_path(@user, recipient)
           %br
           %ul.warnings

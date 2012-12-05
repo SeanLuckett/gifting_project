@@ -9,7 +9,7 @@ module RecipientsHelper
 
   def us_states
     [
-      ['',   ''],
+      #['',   ''],
       ['AK', 'AK'],
       ['AL', 'AL'],
       ['AR', 'AR'],

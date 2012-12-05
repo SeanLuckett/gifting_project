@@ -3,8 +3,8 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  warning_section = $(".recipients_warnings")
-  recipients = $(".recipients_warnings ul.warnings")
+  warning_section = $(".recipient-warnings")
 
-  if recipients.length == 0
-    warning_section.hide()
+  warning_section.each (index, rec) ->
+    if $(this).find('ul').length == 0
+      $(this).hide()
