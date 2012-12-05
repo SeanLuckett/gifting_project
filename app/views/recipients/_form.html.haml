@@ -44,7 +44,7 @@
     = rec.text_field :city
 
     = rec.label :state
-    = rec.select :state, options_for_select(us_states, rec.state), :include_blank => true
+    = rec.select :state, options_for_select(us_states), :include_blank => true
 
     = rec.label :zip_code
     = rec.text_field :zip_code
