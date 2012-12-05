@@ -16,6 +16,10 @@
 
   #div.control-group
     %p.field-description If you want to send birthday gifts, enter birthday:
+
+    - if @recipient.warnings.grep(/[Bb]irthday/).count > 0
+      %p.warning While birthday isn't required, it helps us make helpful gift recommendations.
+
     = rec.label :birthday
     = rec.date_select :birthday, {:start_year => Time.now.year - 90, :order => [:month, :day, :year], :include_blank => true}, {:class => 'input-medium'}
 
@@ -34,6 +38,10 @@
 
   #div.control-group
     %p.field-description Giving an address for this person enables us to send them gifts.
+
+    - if @recipient.warnings.grep(/[Aa]ddress/).count > 0
+      %p.warning We can't send a gift to this recipient until we have a valid shipping address.
+
     = rec.label "Street address:"
     = rec.text_field :address1
 

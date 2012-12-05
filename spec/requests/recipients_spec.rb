@@ -127,7 +127,7 @@ describe "Recipients" do
       @recipient = user.recipients.create(:name => "Jerry Joe Jameson",
                                         :spend_at_least => 5,
                                         :spend_at_most => 25,
-                                        :birthday => 21.years.ago)
+                                        :birthday => nil)
 
       visit edit_user_recipient_path(user, @recipient)
     end
@@ -137,6 +137,21 @@ describe "Recipients" do
       click_button 'Done'
       @recipient.reload.spend_at_least.should == 10
     end
+
+    describe "missing data warnings" do
+      context "when recipient is missing birthday" do
+        it "displays a warning" do
+          subject.should have_content "While birthday isn't required, it helps us make helpful gift recommendations."
+        end
+      end
+
+      context "when recipient is missing any part of address" do
+        it "displays a warning" do
+          subject.should have_content "We can't send a gift to this recipient until we have a valid shipping address."
+        end
+      end
+    end
+
 
   end
 end
