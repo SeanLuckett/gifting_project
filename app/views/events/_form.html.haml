@@ -28,7 +28,7 @@
   - @event.user.recipients.each do |recipient|
     %label.checkbox
       = "#{recipient.name}"
-      %span.has-warnings= "(#{recipient.warnings.join(' ')})"
+      %span.has-warnings= "(#{recipient.warnings.join(' ')})" unless recipient.warnings.blank?
       = check_box_tag "event[recipient_ids][]", recipient.id, @event.recipients.include?(recipient)
 
   = event.button "Done", :class => 'btn'
