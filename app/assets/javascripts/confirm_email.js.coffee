@@ -1,5 +1,5 @@
 jQuery ->
-  email = $("input:text").val()
+  email = $("input:text").data()
 
-  if email
+  if email.emailConfirmed == true
     $("form").trigger("submit")
