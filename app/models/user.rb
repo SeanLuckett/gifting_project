@@ -1,34 +1,18 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id               :integer          not null, primary key
-#  provider         :string(255)
-#  uid              :string(255)
-#  name             :string(255)
-#  oauth_token      :string(255)
-#  oauth_expires_at :datetime
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  email            :string(255)
-#  image            :string(255)
-#  email_confirmed  :boolean          default(FALSE)
-#
-
 class User < ActiveRecord::Base
   has_many :recipients, :dependent => :destroy
   has_many :events, :order => 'date ASC'
   attr_accessible :email
 
   def self.from_omniauth(auth)
-    user = self.find_by_uid(auth[:uid])
-    return user if user
+    user_exists = self.find_by_uid(auth[:uid])
+    return user_exists if user_exists
 
     where(auth.slice(:uid)).new.tap do |user|
       user.name = auth.info.name
       user.provider = auth.provider
       user.image = auth.info.image
       user.email = auth.info.email
+      user.email_confirmed = true unless user.email.blank?
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!

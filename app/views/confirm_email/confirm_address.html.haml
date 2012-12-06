@@ -1,6 +1,8 @@
 %h4 Please confirm your email address.
+%p#email-explanation
+  Giftola sends you gift recommendations through email, so it's important we have your address. If this seems familiar, you're seeing it again because you haven't confirmed your email address. To do so, click the link in the email we sent you.
 = form_for @user, :url => confirm_email_send_email_to_address_path, :html => { :class => 'form-inline' } do |f|
-  = f.text_field :email
+  = f.text_field :email, :data => { email_confirmed: @user.email_confirmed }
   = f.submit "Confirm", :class => 'btn'
 
 = javascript_include_tag "jquery"

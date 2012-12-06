@@ -1,20 +1,3 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id               :integer          not null, primary key
-#  provider         :string(255)
-#  uid              :string(255)
-#  name             :string(255)
-#  oauth_token      :string(255)
-#  oauth_expires_at :datetime
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  email            :string(255)
-#  image            :string(255)
-#  email_confirmed  :boolean          default(FALSE)
-#
-
 require 'spec_helper'
 
 describe User do
@@ -31,6 +14,26 @@ describe User do
         expect{ User.from_omniauth(OmniAuth.config.mock_auth[:facebook]) }.
           not_to change{ ActionMailer::Base.deliveries.count }.
           by(1)
+      end
+    end
+  end
+
+  describe "email confirmation" do
+    context "when user's email imported from Facebook" do
+      it "sets #email_confirmed to true" do
+        set_omniauth
+        user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
+
+        user.email_confirmed.should be_true
+      end
+    end
+
+    context "when user's email not imported from Facebook or just blank" do
+      it "leaves #email_confirmed false" do
+        set_omniauth :facebook => { :email => nil }
+        user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
+
+        user.email_confirmed.should be_false
       end
     end
   end
