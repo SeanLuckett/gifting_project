@@ -28,7 +28,7 @@
             %ul.nav.pull-right
               %li= link_to "Dashboard", dashboard_index_path
               %li= link_to "Profile", user_path(current_user) 
-              %li= link_to "Support", '#'
+              %li= link_to "Support", support_path
               - if session[:user_id].nil?
                 %li= link_to "Logout", '#'
               - else
