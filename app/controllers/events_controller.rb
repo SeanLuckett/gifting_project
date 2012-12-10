@@ -31,6 +31,7 @@ class EventsController < ApplicationController
   end
 
   def update
+    params[:event][:recipient_ids] ||= []
     @event = @user.events.find_by_id(params[:id])
 
     respond_to do |format|

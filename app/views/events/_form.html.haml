@@ -25,10 +25,10 @@
     = event.radio_button(:repeats, false)
 
   %p.field-description Do you have a person, or several in mind for this person?  Select as many as you'd like, and I'll recommend gifts when the date is nigh. 
-  - @event.user.recipients.each do |recipient|
+  - for recipient in @event.user.recipients
     %label.checkbox
-      = "#{recipient.name}"
-      %span.has-warnings= "(#{recipient.warnings.join(' ')})" unless recipient.warnings.blank?
       = check_box_tag "event[recipient_ids][]", recipient.id, @event.recipients.include?(recipient)
+      = recipient.name
+      %span.has-warnings= "(#{recipient.warnings.join(' ')})" if !recipient.warnings.blank? && @event.recipients.include?(recipient)
 
   = event.button "Done", :class => 'btn'
