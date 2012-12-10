@@ -8,7 +8,6 @@ gem 'rails', '3.2.8'
 gem 'pg'
 gem 'haml'
 gem 'haml-rails', group: :development
-gem 'annotate', group: :development
 gem 'omniauth-facebook'
 gem 'requirejs-rails'
 gem 'vacuum'

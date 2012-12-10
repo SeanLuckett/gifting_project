@@ -1,14 +1,3 @@
-# == Schema Information
-#
-# Table name: personas
-#
-#  id          :integer          not null, primary key
-#  title       :string(255)
-#  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#
-
 require 'spec_helper'
 
 describe Persona do
