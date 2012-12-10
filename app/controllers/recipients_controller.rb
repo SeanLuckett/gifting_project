@@ -2,7 +2,6 @@ class RecipientsController < ApplicationController
   layout 'app_with_menu'
   respond_to :html
   skip_before_filter :require_login, :only => [:create, :create_from_facebook]
-  before_filter :get_personas, :except => [:create_from_facebook, :import_friends]
   before_filter :get_user
 
   def import_friends
@@ -63,6 +62,8 @@ class RecipientsController < ApplicationController
   end
 
   def update
+    params[:recipient][:event_ids] ||= []
+    params[:recipient][:persona_ids] ||= []
     @recipient = @user.recipients.find_by_id(params[:id])
 
     respond_to do |format|
@@ -82,9 +83,6 @@ class RecipientsController < ApplicationController
   end
 
   private
-  def get_personas
-    @personas = Persona.all
-  end
 
   def get_user
     @user = current_user

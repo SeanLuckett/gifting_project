@@ -57,15 +57,15 @@
     = rec.label :zip_code
     = rec.text_field :zip_code
   %p.field-description Personas describe common interests for many of a type. Select one or more to describe this person. You can do this any time.
-  - @personas.each do |persona|
+  - for persona in Persona.find(:all)
     %label.checkbox
-      #{persona.title}
       = check_box_tag "recipient[persona_ids][]", persona.id, @recipient.personas.include?(persona)
+      = persona.title
 
   %p.field-description Do you have an event in mind for this person?  Select as many as you'd like, and I'll recommend gifts when the date is nigh. You will be able to add custom events, too.
-  - @recipient.user.events.each do |event|
+  - for event in @recipient.user.events
     %label.checkbox
-      #{event.title}
       = check_box_tag "recipient[event_ids][]", event.id, @recipient.events.include?(event)
+      = event.title
 
   = rec.button "Done", :class => 'btn'
