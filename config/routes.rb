@@ -39,6 +39,11 @@ Giftola::Application.routes.draw do
 
 
   mount JasmineRails::Engine => "specs/" unless Rails.env.production?
+
+  if Rails.env.development?
+    mount MailPreview => 'mail_view'
+  end
+
   # The priority is based upon order of creati
   # first created -> highest priority.
 
