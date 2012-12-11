@@ -45,23 +45,27 @@ describe GiftRecommendation::ApiRequest do
 
     it "returns a response in xml" do
       api = GiftRecommendation::ApiRequest.new(@persona)
-      api.request.class.should == Excon::Response
+      api.request_list.class.should == Nokogiri::XML::NodeSet
     end
   end
 end
 
 describe GiftRecommendation::Recommendation do
-  describe "#recommendation" do
-    before do
-      GiftRecommendation::ApiRequest
-        .any_instance.stub(:request)
-        .and_return( [{:asin => "num", :title => "title", :url => "path_to_amazon"}])
+  before do
+    GiftRecommendation::ApiRequest
+    .any_instance.stub(:request)
+    .and_return( [{:asin => "num", :title => "title", :url => "path_to_amazon"}])
 
-      persona = create(:persona, :title => "Nerd")
-      @recipient = create(:recipient, :personas => [persona])
-      @items = GiftRecommendation::ApiRequest.new(persona).request
-    end
-    subject { GiftRecommendation::Recommendation.new(@recipient, @event, @items) }
-
+    persona = create(:persona, :title => "Nerd")
+    @recipient = create(:recipient, :personas => [persona])
+    @items = GiftRecommendation::ApiRequest.new(persona).request
   end
+
+  subject { GiftRecommendation::Recommendation.new(@recipient, @event, @items) }
+
+  it { should respond_to :recipient }
+  it { should respond_to :event }
+  it { should respond_to :top_recommended }
+  it { should respond_to :alt_recommended }
+
 end
