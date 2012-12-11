@@ -1,12 +1,12 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :recommendation_to_buy do
-    recipient_id ""
-    event_id ""
+  factory :recommended_gift, :class => 'RecommendedGifts' do
+    recipient_id 1
+    event_id 1
     gift_name "MyString"
     gift_url "MyString"
     bought false
-    buy_date "2012-12-10 15:36:00"
+    buy_date "2012-12-11 14:36:44"
   end
 end

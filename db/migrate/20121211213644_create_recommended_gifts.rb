@@ -1,6 +1,6 @@
-class CreateRecommendationsToBuy < ActiveRecord::Migration
+class CreateRecommendedGifts < ActiveRecord::Migration
   def change
-    create_table :recommendation_to_buys do |t|
+    create_table :recommended_gifts do |t|
       t.integer :recipient_id
       t.integer :event_id
       t.string :gift_name
