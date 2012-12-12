@@ -1,3 +1,5 @@
+require File.expand_path("../../../lib/gateway.rb", __FILE__)
+
 class GiftRecommendations < ActionMailer::Base
   default from: "noreply@giftola.com"
 
@@ -7,7 +9,14 @@ class GiftRecommendations < ActionMailer::Base
   #   en.gift_recommendations.recommendation.subject
   #
   def recommendation(recipient, event)
-    @greeting = "Hi, #{recipient.user.name}"
+    @recipient = recipient
+    @user = recipient.user
+    @greeting = "Hi, #{@user.name.split(" ").first}."
+
+    days_until_event = event.date.day - Date.today.day
+    @event_warning = "#{event.title} will be here in #{days_until_event} days..."
+
+    @recommendation = GiftRecommendation::Gateway.new(recipient, event).recommend
 
     mail to: recipient.user.email, subject: "A gift recommendation for #{recipient.name}"
   end
