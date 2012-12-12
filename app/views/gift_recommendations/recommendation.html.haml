@@ -8,7 +8,7 @@
     %table#background-table{:cellpadding => "0", :cellspacing => "0", :border => "0", :style => "margin:0; padding:0; width:100% !important; line-height: 100% !important;"}
       %tr
         %td
-          %table{:cellpadding => "0", :cellspacing => "0", :border => "0", :align => "center"}
+          %table{:cellpadding => "0", :cellspacing => "0", :border => "0", :align => "center", :style => "border-spacing: 0px 4px;"}
             %tr
               %td{:valign => "top", :width => "600", :colspan => "2"}
                 %h3{:style => "color: black !important;"}= @greeting
@@ -19,5 +19,39 @@
               %td{:valign => "top"}
               %td{:valign => "top", :style => "text-align: center;"}
                 %h2{:style => "color: black !important;"} Top Recommendation:
-                %h3{:style => "color: black !important;"}= "\"#{@recommendation.top_recommended[:title]}\""
-                %h4{:style => "color: black !important;"}= "#{@recommendation.top_recommended[:price]}"
+                %h3{:style => "color: black !important;"}= "\"#{@top_recommended[:title]}\""
+                = link_to image_tag("http://www.placekitten.com/150/200"), @top_recommended[:url]
+                %h4{:style => "color: black !important;"}= "#{@top_recommended[:price]}"
+
+            %tr
+              %td{:valign => "top", :colspan => "2", :width => "600"}
+                %h3{:style => "color: black !important;"}= "If this is a great gift, do nothing and we'll take care of it for you."
+                %h4{:style => "color: black !important;"}
+                  = "However, if you'd like to change the gift, we have some other recommendations.  Just"
+                  -# this will link to a page where alternative recommendations are shown, allowing user to select one.
+                  = link_to "click this link", '#'
+                  = "and we'll show you what else we came up with."
+
+            %tr
+              %td{:valign => "top", :colspan => "2", :width => "600"}
+                %hr
+
+            %tr
+              %td{:valign => "top", :colspan => "2", :width => "600"}
+                %h3{:style => "color: black !important;"} Upcoming events
+
+            -# Removes first event (the one the email is about) before cycling through them
+            - unless @upcoming_events.empty?
+              - @upcoming_events.each do |event|
+                %tr
+                  %td{:valign => "top", :colspan => "2", :width => "600", :style => "border: .1em solid gray; padding: 5px"}
+                    %h4{:style => "color: black !important;"}
+                      = "#{event.title} is in #{num_days_until(event)} days. "
+                      = link_to "Click here", edit_user_event_url(@user, event)
+                      = "to add more people to this event."
+                    - event.recipients.each do |recipient|
+                      = image_tag recipient.image
+            - else
+              %tr
+                %td{:valign => "top", :colspan => "2", :width => "600"}
+                  %h4{:style => "color: black !important;"} You have no events in the next two weeks.
