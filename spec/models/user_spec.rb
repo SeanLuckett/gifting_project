@@ -1,17 +1,32 @@
 require 'spec_helper'
 
 describe User do
+  describe "sending recommendation email" do
+    before do
+      @user = User.from_omniauth(set_omniauth)
+      ActionMailer::Base.deliveries.clear
+    end
+
+    it "sends the email" do
+      user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
+      event = create(:event)
+      persona = create(:persona, :title => "Nerd")
+      recipient = create(:recipient, :user_id => user.id, :personas => [persona], :events => [event])
+
+      user.send_recommendation(recipient, event)
+      ActionMailer::Base.deliveries.last.to.should == [user.email]
+    end
+  end
+
   describe "sending welcome email" do
     before :each do
       ActionMailer::Base.deliveries.clear
-      set_omniauth
-      @user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
     end
 
     context "when user is not new" do
       it "won't send a duplicate email" do
-        user2 = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
-        expect{ User.from_omniauth(OmniAuth.config.mock_auth[:facebook]) }.
+        user2 = User.from_omniauth(set_omniauth)
+        expect{ User.from_omniauth(set_omniauth) }.
           not_to change{ ActionMailer::Base.deliveries.count }.
           by(1)
       end
@@ -21,8 +36,7 @@ describe User do
   describe "email confirmation" do
     context "when user's email imported from Facebook" do
       it "sets #email_confirmed to true" do
-        set_omniauth
-        user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
+        user = User.from_omniauth(set_omniauth)
 
         user.email_confirmed.should be_true
       end
@@ -30,8 +44,8 @@ describe User do
 
     context "when user's email not imported from Facebook or just blank" do
       it "leaves #email_confirmed false" do
-        set_omniauth :facebook => { :email => nil }
-        user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
+        #set_omniauth :facebook => { :email => nil }
+        user = User.from_omniauth(set_omniauth :facebook => { :email => nil })
 
         user.email_confirmed.should be_false
       end
@@ -40,8 +54,7 @@ describe User do
 
   describe "saving users" do
     before :each do
-      set_omniauth
-      @user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
+      @user = User.from_omniauth(set_omniauth)
     end
 
     context "when saving new users" do

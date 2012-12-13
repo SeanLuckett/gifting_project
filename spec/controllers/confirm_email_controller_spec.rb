@@ -44,8 +44,8 @@ describe ConfirmEmailController do
 
   describe "#save_address_record_confirmed" do
     before :each do
-      get :save_address_record_confirmed, :auth_token => @current_user.oauth_token,
-                                   :confirm_email => true
+      get :save_address_record_confirmed, { :auth_token => @current_user.oauth_token,
+                                   :confirm_email => true }
     end
 
     it "changes email_confirmed to true" do

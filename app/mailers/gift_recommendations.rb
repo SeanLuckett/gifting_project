@@ -11,10 +11,10 @@ class GiftRecommendations < ActionMailer::Base
   #
   #   en.gift_recommendations.recommendation.subject
   #
-  def recommendation(recipient, event)
+  def recommendation(user, recipient, event)
     @recipient = recipient
     @event = event
-    @user = recipient.user
+    @user = user
     @greeting = "Hi, #{@user.name.split(" ").first}."
 
     days_until_event = num_days_until(event)
@@ -26,8 +26,4 @@ class GiftRecommendations < ActionMailer::Base
 
     mail to: recipient.user.email, subject: "A gift recommendation for #{recipient.name}"
   end
-
-  #def num_days_until(event)
-    #event.date.day - Date.today.day
-  #end
 end

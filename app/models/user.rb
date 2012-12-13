@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
     Confirmer.confirm_user_email(self).deliver
   end
 
+  def send_recommendation(recipient, event)
+    GiftRecommendations.recommendation(self, recipient, event).deliver
+  end
+
   def create_standard_events
     self.events.create(
       title: "Christmas",
