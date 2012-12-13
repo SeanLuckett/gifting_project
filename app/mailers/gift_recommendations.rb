@@ -1,4 +1,7 @@
-require File.expand_path("../../../lib/gateway.rb", __FILE__)
+# Have to comment this out for Heroku for time being.  gateway.rb is in git ignore due
+# to issues setting up Heroku environment variables for Amazon API
+
+#require File.expand_path("../../../lib/gateway.rb", __FILE__)
 
 class GiftRecommendations < ActionMailer::Base
   include EventsHelper
