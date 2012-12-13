@@ -24,7 +24,7 @@
 
 # recommendation gateway causes trouble because it uses yaml file for Amazon creds
 # for now, leaving the files out.
+/app/mailers/gift_recommendations.rb
 /lib/gateway.rb
 /spec/lib gateway_spec.rb
 /app/controllers/api/recommendations_controller.rb
-/app/mailers/gift_recommendations.rb
