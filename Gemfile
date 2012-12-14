@@ -8,6 +8,8 @@ gem 'rails', '3.2.8'
 gem 'pg'
 gem 'haml'
 gem 'haml-rails', group: :development
+gem 'better_errors', group: :development
+gem 'binding_of_caller'
 gem 'omniauth-facebook'
 gem 'requirejs-rails'
 gem 'vacuum'
