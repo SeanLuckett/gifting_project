@@ -20,7 +20,7 @@
               %td{:valign => "top", :style => "text-align: center;"}
                 %h2{:style => "color: black !important;"} Top Recommendation:
                 %h3{:style => "color: black !important;"}= "\"#{@top_recommended[:title]}\""
-                = link_to image_tag("http://www.placekitten.com/150/200"), @top_recommended[:url]
+                = link_to image_tag(@top_recommended[:img_url]), @top_recommended[:url]
                 %h4{:style => "color: black !important;"}= "#{@top_recommended[:price]}"
 
             %tr
