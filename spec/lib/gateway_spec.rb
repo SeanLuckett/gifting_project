@@ -34,31 +34,30 @@ describe GiftRecommendation::Gateway do
 
 end
 
-describe GiftRecommendation::ApiRequest do
+describe GiftRecommendation::APIRequest do
   # This will get more sophisticated but, for now, just uses one browsenode (PS3)
   # for Nerd persona
   describe "Making a (basic) Amazon request" do
     before :each do
-      @persona = double("Persona")
-      @persona.stub(:title) { "Nerd" }
+      @browse_node_list = double("Browse Node list").as_null_object
     end
 
-    it "returns a response in xml" do
-      api = GiftRecommendation::ApiRequest.new(@persona)
-      api.request_list.class.should == Nokogiri::XML::NodeSet
+    it "returns a list of top items" do
+      api = GiftRecommendation::APIRequest.new(@browse_node_list)
+      api.request_list.class.should == Array
     end
   end
 end
 
 describe GiftRecommendation::Recommendation do
   before do
-    GiftRecommendation::ApiRequest
+    GiftRecommendation::APIRequest
     .any_instance.stub(:request)
     .and_return( [{:asin => "num", :title => "title", :url => "path_to_amazon"}])
 
     persona = create(:persona, :title => "Nerd")
     @recipient = create(:recipient, :personas => [persona])
-    @items = GiftRecommendation::ApiRequest.new(persona).request
+    @items = GiftRecommendation::APIRequest.new(persona).request
   end
 
   subject { GiftRecommendation::Recommendation.new(@recipient, @event, @items) }
