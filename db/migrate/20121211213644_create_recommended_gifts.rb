@@ -5,7 +5,7 @@ class CreateRecommendedGifts < ActiveRecord::Migration
       t.integer :event_id
       t.string :gift_name
       t.string :gift_url
-      t.boolean :bought
+      t.boolean :bought, :default => false
       t.datetime :buy_date
 
       t.timestamps

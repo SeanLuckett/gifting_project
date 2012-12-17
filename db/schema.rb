@@ -67,10 +67,10 @@ ActiveRecord::Schema.define(:version => 20121211213644) do
     t.integer  "event_id"
     t.string   "gift_name"
     t.string   "gift_url"
-    t.boolean  "bought"
+    t.boolean  "bought",       :default => false
     t.datetime "buy_date"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "users", :force => true do |t|
