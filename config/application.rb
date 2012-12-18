@@ -15,8 +15,8 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-# Load CONFIG vars and merge with ENV vars - load here so can use values in other initializers
-CONFIG = (YAML.load_file('config/config.yml')[Rails.env] rescue {}).merge(ENV)
+# Load application ENV vars and merge with preexisting ENV vars. Loaded here so can use values in initializers.
+ENV.update YAML.load_file('config/application.yml')[Rails.env] rescue {}
 
 module Giftola
   class Application < Rails::Application

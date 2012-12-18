@@ -18,5 +18,5 @@
 /tmp
 .DS_Store
 .jhw-cache/
-/config/config.yml
+/config/application.yml
 
