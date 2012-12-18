@@ -83,9 +83,9 @@ module GiftRecommendation
     def initialize(browse_nodes)
       @browse_nodes = browse_nodes
       creds = {
-        :key => ENV['amazon_key'],
-        :secret => ENV['amazon_secret'],
-        :tag => ENV['amazon_tag']
+        :key => ENV['AMAZON_KEY'],
+        :secret => ENV['AMAZON_SECRET'],
+        :tag => ENV['AMAZON_TAG']
       }
       @request = Vacuum.new
       @request.configure(creds)
