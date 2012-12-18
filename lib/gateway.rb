@@ -6,7 +6,6 @@
 # 5 alternatives).  So, I do some list processing and product weighting before grabbing
 # additional information.
 # ######################################################################################
-require 'nokogiri'
 
 module GiftRecommendation
   class Gateway
