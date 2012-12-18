@@ -17,14 +17,6 @@
 /log/*.log
 /tmp
 .DS_Store
-/config/heroku_env.rb
-/config/sendgrid.yml
-/config/amazon.yml
 .jhw-cache/
+/config/config.yml
 
-# recommendation gateway causes trouble because it uses yaml file for Amazon creds
-# for now, leaving the files out.
-/app/mailers/gift_recommendations.rb
-/lib/gateway.rb
-/spec/lib gateway_spec.rb
-/app/controllers/api/recommendations_controller.rb

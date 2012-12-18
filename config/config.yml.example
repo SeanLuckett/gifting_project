@@ -1,0 +1,28 @@
+defaults: &defaults
+  #basic_auth: false
+  #basic_auth_user: 
+  #basic_auth_password: 
+  #site_name: 
+
+  facebook_key:
+  facebook_secret:
+
+  sendgrid_username:
+  sendgrid_password:
+  sendgrid_domain: 
+
+  amazon_key: # creds for amazon product advertising api
+  amazon_secret:
+  amazon_tag:
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults

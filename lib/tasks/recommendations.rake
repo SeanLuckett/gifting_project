@@ -12,5 +12,4 @@ namespace :recommendations do
     user.send_recommendation(recipient, event)
     puts "Email sent to #{user.name} for #{recipient.name}'s gift on #{event.title}"
   end
-
 end
